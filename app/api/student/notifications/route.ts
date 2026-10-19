@@ -1,11 +1,11 @@
 export const instant = false;
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getUserIdFromToken } from '@/lib/auth';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const userId = await getUserIdFromToken();
+    const userId = await getUserIdFromToken(req);
     if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const user = await prisma.user.findUnique({ where: { id: userId } });
@@ -42,7 +42,7 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   try {
-    const userId = await getUserIdFromToken();
+    const userId = await getUserIdFromToken(req);
     if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const { notificationIds } = await request.json();

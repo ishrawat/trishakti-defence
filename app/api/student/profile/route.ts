@@ -1,12 +1,12 @@
 export const instant = false;
 import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getUserIdFromToken } from '@/lib/auth';
 
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const userId = await getUserIdFromToken();
+    const userId = await getUserIdFromToken(req);
     if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const user = await prisma.user.findUnique({
