@@ -4,8 +4,7 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(request: Request) {
   try {
-    // We now need the testId to find all the sections inside it
-    const { testId, defaultSectionId, questions } = await request.json();
+    const { testId, questions } = await request.json();
 
     if (!testId || !questions || questions.length === 0) {
       return NextResponse.json({ error: 'Missing testId or questions' }, { status: 400 });
@@ -21,29 +20,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Mock test not found' }, { status: 404 });
     }
 
-    // 2. Map the data and assign the correct Section ID
+    // 2. Map the data and assign the correct Section ID based on the Excel column
     const dataToInsert = questions.map((q: any, index: number) => {
-      // If the Excel has a Section column, find that section's ID
-      let finalSectionId = defaultSectionId;
-      
-      if (q.sectionName) {
-        const matchedSection = test.sections.find(
-          (s) => s.name.toLowerCase() === String(q.sectionName).toLowerCase().trim()
-        );
-        if (matchedSection) {
-          finalSectionId = matchedSection.id;
-        } else {
-          throw new Error(`Row ${index + 2}: Section "${q.sectionName}" not found in this test.`);
-        }
+      if (!q.sectionName) {
+        throw new Error(`Row ${index + 2}: Missing Section name.`);
       }
 
-      if (!finalSectionId) {
-        throw new Error(`Row ${index + 2}: No section selected or found.`);
+      // Find the matching section in the database (case-insensitive)
+      const matchedSection = test.sections.find(
+        (s) => s.name.toLowerCase() === String(q.sectionName).toLowerCase().trim()
+      );
+
+      if (!matchedSection) {
+        throw new Error(`Row ${index + 2}: Section "${q.sectionName}" not found in this test. Please check spelling.`);
       }
 
       // Clean the data (String() fixes the Excel Date issue)
       return {
-        sectionId: finalSectionId,
+        sectionId: matchedSection.id,
         text: String(q.text || '').trim(),
         optionA: String(q.optionA || '').trim(),
         optionB: String(q.optionB || '').trim(),
@@ -57,7 +51,7 @@ export async function POST(request: Request) {
       };
     });
 
-    // 3. Insert them all
+    // 3. Insert them all at once
     const result = await prisma.question.createMany({
       data: dataToInsert,
     });
