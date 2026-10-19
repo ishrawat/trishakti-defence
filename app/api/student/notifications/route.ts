@@ -24,7 +24,7 @@ export async function GET() {
       take: 10
     });
 
-    const formatted = notifications.map(n => ({
+    const formatted = notifications.map((n: any) => ({
       id: n.id,
       title: n.title,
       message: n.message,
