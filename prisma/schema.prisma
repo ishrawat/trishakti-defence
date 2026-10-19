@@ -87,6 +87,12 @@ model Attempt {
   tabSwitchCount Int        @default(0)
   pauseCount     Int        @default(0)
   responses      Response[]
+
+  deadline          DateTime?
+  sectionDeadlines  Json?
+  currentSectionIdx Int       @default(0)
+  pausedAt          DateTime?
+  pausedDurationMs  Int       @default(0)
 }
 
 model Response {

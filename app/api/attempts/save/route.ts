@@ -1,32 +1,16 @@
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { NextResponse } from 'next/server';
-
-
-export async function POST(request: Request) {
-  try {
-    const { attemptId, questionId, selectedOption, status, timeSpent } = await request.json();
-
-    const existing = await prisma.response.findFirst({
-      where: { attemptId, questionId }
-    });
-
-    if (existing) {
-      await prisma.response.update({
-        where: { id: existing.id },
-        data: { 
-          selectedOption, 
-          status, 
-          timeSpent: { increment: timeSpent || 0 } 
-        }
-      });
-    } else {
-      await prisma.response.create({
-        data: { attemptId, questionId, selectedOption, status, timeSpent: timeSpent || 0 }
-      });
-    }
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ error: 'Failed to save' }, { status: 500 });
-  }
+import { getUserFromRequest } from '@/lib/auth';
+export async function POST(req: NextRequest) {
+  const auth = await getUserFromRequest(req);
+  if (!auth) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const { attemptId, questionId, selectedOption, status, timeSpent } = await req.json();
+  const attempt = await prisma.attempt.findUnique({ where: { id: attemptId } });
+  if (!attempt || attempt.userId !== auth.userId) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  if (attempt.deadline && new Date() > attempt.deadline) return NextResponse.json({ expired: true }, { status: 409 });
+  const existing = await prisma.response.findFirst({ where: { attemptId, questionId } });
+  const data = { selectedOption: selectedOption ?? null, status: status ?? 'NOT_ANSWERED', timeSpent: Math.max(0, Number(timeSpent) || 0) };
+  if (existing) await prisma.response.update({ where: { id: existing.id }, data });
+  else await prisma.response.create({ data: { attemptId, questionId, ...data } });
+  return NextResponse.json({ ok: true, deadline: attempt.deadline?.toISOString() });
 }
