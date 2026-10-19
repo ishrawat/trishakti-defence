@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trishul Defence  — Bhim | Army · Navy · Air Force Coaching</title>
+<meta name="description" content="Trishul Defence , Bhim, Rajasthan. Complete preparation for Indian Army, Navy and Air Force entries — written exam, physical training, medical and final merit. Guided by an instructor with 8 AFCAT, 4 CDS and 2 CGCAT clearances.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --bg:#faf8f4;
+  --surface:#ffffff;
+  --border:#e8e2d5;
+  --border-2:#d8cfbb;
+
+  --ink:#1a2740;
+  --ink-2:#2d3c56;
+  --muted:#5f6b7a;
+  --dim:#8f9aa7;
+
+  --army:#5a7a3f;
+  --army-bg:#eef3e6;
+  --navy:#1e3d64;
+  --navy-bg:#e9eef5;
+  --iaf:#3d7ea6;
+  --iaf-bg:#e7f0f6;
+
+  --gold:#b8893f;
+  --gold-2:#c9a961;
+  --gold-bg:#faf3e5;
+
+  --whatsapp:#25d366;
+  --whatsapp-dk:#1da851;
+
+  --radius:12px;
+  --radius-sm:8px;
+
+  --pad:clamp(20px,5vw,80px);
+  --container:1200px;
+
+  --shadow-sm:0 1px 2px rgba(26,39,64,.05);
+  --shadow:0 4px 16px rgba(26,39,64,.06);
+  --shadow-lg:0 12px 40px rgba(26,39,64,.08);
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;
+  font-size:16px;line-height:1.6;font-weight:400;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4{font-weight:700;line-height:1.2;letter-spacing:-.015em;color:var(--ink)}
+::selection{background:var(--gold-2);color:#fff}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container{max-width:var(--container);margin:0 auto;padding-inline:var(--pad);width:100%}
+.section{padding:clamp(60px,10vh,100px) 0}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:14px;
+}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--gold);border-radius:2px;display:block}
+
+.section-head{max-width:720px;margin-bottom:44px}
+.section-head.center{margin-inline:auto;text-align:center}
+.section-head.center .eyebrow{justify-content:center}
+.section-head h2{
+  font-size:clamp(1.75rem,3.8vw,2.5rem);
+  font-weight:700;letter-spacing:-.02em;line-height:1.15;
+  margin-bottom:14px;
+}
+.section-head p{font-size:clamp(1rem,1.2vw,1.05rem);color:var(--muted);line-height:1.7}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 26px;border-radius:var(--radius-sm);
+  font-size:15px;font-weight:600;line-height:1;
+  transition:all .2s ease;cursor:pointer;
+  border:1.5px solid transparent;
+  min-height:48px;white-space:nowrap;
+}
+.btn svg{width:17px;height:17px;flex:none}
+.btn-primary{background:var(--gold);color:#fff;box-shadow:0 2px 8px rgba(184,137,63,.25)}
+.btn-primary:hover{background:#a3782f;transform:translateY(-1px);box-shadow:0 4px 14px rgba(184,137,63,.3)}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--border-2)}
+.btn-outline:hover{border-color:var(--ink);background:var(--surface)}
+.btn-whatsapp{background:var(--whatsapp);color:#fff;box-shadow:0 2px 8px rgba(37,211,102,.25)}
+.btn-whatsapp:hover{background:var(--whatsapp-dk);transform:translateY(-1px)}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(250,248,244,.95);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.tri-bar{display:flex;height:3px;width:100%}
+.tri-bar span{flex:1}
+.tri-bar .t-army{background:var(--army)}
+.tri-bar .t-navy{background:var(--navy)}
+.tri-bar .t-iaf{background:var(--iaf)}
+
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;padding:14px 0;
+}
+.logo{display:flex;align-items:center;gap:11px}
+.logo-mark{
+  width:42px;height:42px;flex:none;border-radius:10px;
+  background:var(--navy);display:grid;place-items:center;
+  color:#fff;box-shadow:0 2px 8px rgba(30,61,100,.2);
+}
+.logo-mark svg{width:24px;height:24px}
+.logo-text{line-height:1.15}
+.logo-text strong{display:block;font-size:17px;font-weight:700;color:var(--navy);letter-spacing:-.01em}
+.logo-text span{display:block;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.02em}
+
+.nav{display:flex;gap:6px;align-items:center}
+.nav a{
+  padding:9px 14px;border-radius:var(--radius-sm);
+  font-size:14.5px;font-weight:500;color:var(--ink-2);
+  transition:all .18s ease;
+}
+.nav a:hover{background:var(--surface);color:var(--navy)}
+
+.header-cta{display:flex;align-items:center;gap:10px}
+.header-phone{
+  display:flex;align-items:center;gap:8px;
+  font-size:14.5px;font-weight:600;color:var(--navy);
+  padding:8px 12px;border-radius:var(--radius-sm);
+  transition:background .18s;
+}
+.header-phone:hover{background:var(--surface)}
+.header-phone svg{width:16px;height:16px;color:var(--gold)}
+
+.menu-toggle{
+  display:none;width:44px;height:44px;
+  border-radius:var(--radius-sm);position:relative;
+  background:var(--surface);border:1px solid var(--border);
+}
+.menu-toggle span{
+  position:absolute;left:12px;width:20px;height:2px;
+  background:var(--navy);border-radius:2px;
+  transition:all .25s ease;
+}
+.menu-toggle span:nth-child(1){top:16px}
+.menu-toggle span:nth-child(2){top:22px}
+.menu-toggle span:nth-child(3){top:28px}
+.menu-toggle.open span:nth-child(1){top:22px;transform:rotate(45deg)}
+.menu-toggle.open span:nth-child(2){opacity:0}
+.menu-toggle.open span:nth-child(3){top:22px;transform:rotate(-45deg)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  padding:clamp(60px,9vh,110px) 0 clamp(70px,11vh,120px);
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(135deg, rgba(20,42,72,.92) 0%, rgba(30,61,100,.78) 45%, rgba(10,11,9,.72) 100%),
+    url('https://nationalwarmemorial.org/images/b/b1/Indian_Army-Rajput_regiment.jpeg.jpg') center/cover no-repeat;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(40px,6vw,80px);align-items:center;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:7px 14px;border-radius:100px;
+  background:rgba(201,169,97,.18);
+  border:1px solid rgba(201,169,97,.4);
+  font-size:12.5px;font-weight:600;color:var(--gold-2);
+  margin-bottom:22px;
+}
+.hero-badge .dots{display:flex;gap:4px}
+.hero-badge .dots i{width:7px;height:7px;border-radius:50%;display:block}
+.hero-badge .dots .d1{background:#8fbf6d}
+.hero-badge .dots .d2{background:#6ab0e0}
+.hero-badge .dots .d3{background:#7fc0e8}
+
+.hero h1{
+  font-size:clamp(2.1rem,4.6vw,3.6rem);
+  line-height:1.12;letter-spacing:-.025em;font-weight:700;
+  margin-bottom:20px;color:#fff;
+}
+.hero h1 .hl{color:var(--gold-2);position:relative;white-space:nowrap}
+.hero h1 .hl::after{
+  content:'';position:absolute;left:0;right:0;bottom:.05em;height:.22em;
+  background:rgba(201,169,97,.3);z-index:-1;border-radius:2px;
+}
+.hero-lede{
+  font-size:clamp(1rem,1.3vw,1.1rem);
+  color:rgba(255,255,255,.85);line-height:1.75;
+  max-width:540px;margin-bottom:32px;
+}
+.hero-lede strong{color:#fff;font-weight:600}
+
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-cta .btn-outline{color:#fff;border-color:rgba(255,255,255,.35)}
+.hero-cta .btn-outline:hover{background:rgba(255,255,255,.12);border-color:#fff}
+
+.hero-facts{
+  display:flex;gap:32px;flex-wrap:wrap;
+  padding-top:28px;border-top:1px solid rgba(255,255,255,.15);
+}
+.hero-fact b{
+  display:block;font-size:1.5rem;font-weight:700;
+  color:var(--gold-2);line-height:1;margin-bottom:5px;
+}
+.hero-fact span{font-size:12.5px;color:rgba(255,255,255,.7);font-weight:500}
+
+/* hero card */
+.hero-card{
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:var(--radius);padding:32px;
+  box-shadow:var(--shadow-lg);position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--army) 33.33%,var(--iaf) 33.33% 66.66%,var(--navy) 66.66%);
+}
+.hero-card h3{
+  font-size:1.15rem;font-weight:700;margin-bottom:6px;
+  color:var(--navy);
+}
+.hero-card .sub{
+  font-size:13px;color:var(--muted);margin-bottom:24px;
+}
+.cred-list{display:flex;flex-direction:column;gap:14px}
+.cred-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-bottom:14px;border-bottom:1px solid var(--border);
+}
+.cred-row:last-child{border-bottom:0;padding-bottom:0}
+.cred-row .name{font-size:14.5px;font-weight:600;color:var(--ink)}
+.cred-row .name small{display:block;font-size:11.5px;color:var(--muted);font-weight:400;margin-top:2px}
+.cred-row .count{
+  font-size:1.8rem;font-weight:700;color:var(--gold);
+  line-height:1;letter-spacing:-.02em;
+}
+.cred-row .count sup{font-size:.5em;color:var(--muted);font-weight:500;margin-left:2px}
+.hero-card .foot{
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--border);
+  font-size:12.5px;color:var(--muted);line-height:1.6;
+}
+.hero-card .foot strong{color:var(--ink);font-weight:600}
+
+/* ============================================================
+   SERVICES STRIP
+   ============================================================ */
+.services-strip{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:32px 0;
+}
+.strip-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;align-items:center;
+}
+.strip-item{
+  display:flex;align-items:center;gap:14px;
+  padding:8px 14px;border-radius:var(--radius-sm);
+  transition:background .2s;
+}
+.strip-item:hover{background:var(--bg)}
+.strip-icon{
+  width:48px;height:48px;flex:none;border-radius:12px;
+  display:grid;place-items:center;overflow:hidden;
+}
+.strip-icon svg{width:24px;height:24px;color:#fff}
+.strip-item.army .strip-icon{background:var(--army)}
+.strip-item.navy .strip-icon{background:var(--navy)}
+.strip-item.iaf  .strip-icon{background:var(--iaf)}
+.strip-text strong{
+  display:block;font-size:15px;font-weight:600;
+  color:var(--ink);line-height:1.2;
+}
+.strip-text span{font-size:12.5px;color:var(--muted)}
+
+/* ============================================================
+   COURSES
+   ============================================================ */
+.courses-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+.course{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  position:relative;overflow:hidden;
+  transition:all .25s ease;
+}
+.course:hover{
+  border-color:var(--border-2);
+  box-shadow:var(--shadow);
+  transform:translateY(-2px);
+}
+.course::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+}
+.course.army::before{background:var(--army)}
+.course.navy::before{background:var(--navy)}
+.course.iaf::before{background:var(--iaf)}
+
+.course-img{
+  width:100%;height:170px;
+  object-fit:cover;display:block;
+  border-radius:var(--radius-sm);
+  margin-bottom:20px;
+  background:var(--bg);
+}
+
+.course-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:5px 11px;border-radius:100px;
+  font-size:11.5px;font-weight:600;letter-spacing:.03em;
+  text-transform:uppercase;margin-bottom:16px;
+}
+.course.army .course-badge{background:var(--army-bg);color:var(--army)}
+.course.navy .course-badge{background:var(--navy-bg);color:var(--navy)}
+.course.iaf  .course-badge{background:var(--iaf-bg);color:var(--iaf)}
+.course-badge svg{width:12px;height:12px}
+
+.course h3{
+  font-size:1.3rem;font-weight:700;color:var(--ink);
+  margin-bottom:6px;letter-spacing:-.015em;
+}
+.course .sub{font-size:13px;color:var(--muted);margin-bottom:22px}
+
+.course-meta{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;
+  padding:20px 0;margin-bottom:20px;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.meta-item .lbl{
+  font-size:11px;font-weight:600;color:var(--dim);
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.meta-item .val{
+  font-size:14px;font-weight:600;color:var(--ink-2);
+  line-height:1.35;
+}
+.course-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:14px;font-weight:600;color:var(--gold);
+  transition:gap .2s ease;
+}
+.course:hover .course-cta{gap:11px}
+.course-cta svg{width:15px;height:15px}
+
+/* ============================================================
+   WHY US
+   ============================================================ */
+.why{background:var(--surface);border-block:1px solid var(--border)}
+.why-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+}
+.why-item{
+  text-align:center;padding:28px 20px;
+  border-radius:var(--radius);
+  transition:background .2s;
+}
+.why-item:hover{background:var(--bg)}
+.why-icon{
+  width:60px;height:60px;margin:0 auto 20px;
+  border-radius:16px;background:var(--gold-bg);
+  display:grid;place-items:center;
+  color:var(--gold);
+}
+.why-icon svg{width:28px;height:28px}
+.why-item h4{
+  font-size:1.05rem;font-weight:700;margin-bottom:9px;
+  color:var(--ink);
+}
+.why-item p{font-size:14px;color:var(--muted);line-height:1.65}
+
+/* ============================================================
+   INSTRUCTOR
+   ============================================================ */
+.instructor-grid{
+  display:grid;grid-template-columns:.85fr 1.15fr;
+  gap:clamp(32px,5vw,64px);align-items:center;
+}
+.instructor-visual{
+  background:linear-gradient(160deg,var(--navy) 0%,#152c47 100%);
+  border-radius:var(--radius);padding:28px 28px 32px;
+  color:#fff;position:relative;overflow:hidden;
+}
+.instructor-visual::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(201,169,97,.15) 0%,transparent 45%),
+    radial-gradient(circle at 85% 85%,rgba(61,126,166,.2) 0%,transparent 45%);
+  z-index:0;
+}
+.instructor-photo{
+  width:100%;height:260px;
+  object-fit:cover;
+  border-radius:var(--radius-sm);
+  margin-bottom:22px;
+  position:relative;z-index:1;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+}
+.instructor-visual h3{
+  font-size:1.5rem;font-weight:700;color:#fff;
+  margin-bottom:6px;position:relative;z-index:1;
+}
+.instructor-visual .role{
+  font-size:14px;color:rgba(255,255,255,.7);
+  margin-bottom:22px;position:relative;z-index:1;
+}
+.instructor-visual .tagline{
+  font-size:14.5px;line-height:1.7;color:rgba(255,255,255,.85);
+  padding-top:22px;border-top:1px solid rgba(255,255,255,.15);
+  position:relative;z-index:1;font-style:italic;
+}
+
+.instructor-content h2{
+  font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;
+  letter-spacing:-.02em;line-height:1.2;margin-bottom:18px;
+}
+.instructor-content > p{
+  font-size:15.5px;color:var(--muted);line-height:1.8;
+  margin-bottom:16px;
+}
+.instructor-content p strong{color:var(--ink);font-weight:600}
+
+.cred-highlight{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  margin:26px 0;padding:22px;
+  background:var(--gold-bg);border-radius:var(--radius);
+  border:1px solid rgba(184,137,63,.15);
+}
+.cred-highlight .ch-item{text-align:center}
+.cred-highlight .ch-num{
+  font-size:1.9rem;font-weight:700;color:var(--gold);
+  line-height:1;letter-spacing:-.02em;margin-bottom:6px;
+}
+.cred-highlight .ch-lbl{
+  font-size:11.5px;font-weight:600;color:var(--ink-2);
+  letter-spacing:.04em;text-transform:uppercase;line-height:1.3;
+}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.process{background:var(--surface);border-block:1px solid var(--border)}
+.process-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+.step{
+  padding:28px 22px;border-radius:var(--radius);
+  background:var(--bg);border:1px solid var(--border);
+  position:relative;transition:all .25s;
+}
+.step:hover{
+  border-color:var(--gold-2);
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+}
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:10px;
+  background:var(--gold);color:#fff;
+  font-size:15px;font-weight:700;
+  margin-bottom:18px;
+}
+.step h4{font-size:1.05rem;font-weight:700;margin-bottom:10px}
+.step p{font-size:13.5px;color:var(--muted);line-height:1.65}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery{
+  background:var(--surface);
+  border-block:1px solid var(--border);
+}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+}
+.gallery-item{
+  position:relative;
+  border-radius:var(--radius);
+  overflow:hidden;
+  aspect-ratio:4/3;
+  background:var(--bg);
+  cursor:pointer;
+}
+.gallery-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .6s ease;
+  display:block;
+}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 45%,rgba(10,11,9,.75) 100%);
+  pointer-events:none;
+}
+.gallery-label{
+  position:absolute;bottom:16px;left:18px;right:18px;z-index:2;
+  color:#fff;font-size:14px;font-weight:600;
+  display:flex;align-items:center;gap:10px;
+}
+.gallery-label i{
+  width:8px;height:8px;border-radius:50%;display:block;flex:none;
+}
+.gallery-item.army .gallery-label i{background:#8fbf6d}
+.gallery-item.navy .gallery-label i{background:#6ab0e0}
+.gallery-item.iaf .gallery-label i{background:#7fc0e8}
+
+.gallery-item.wide{grid-column:span 2}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats-section{
+  position:relative;
+  background:
+    linear-gradient(135deg, rgba(20,42,72,.92) 0%, rgba(10,11,9,.88) 100%),
+    url('https://nationalwarmemorial.org/images/0/0c/Exercise_Shakti_-_ASMI_gun_being_shown_to_visiting_French_soldier.jpg') center/cover no-repeat;
+  background-attachment:fixed;
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+}
+.stat{
+  text-align:center;padding:32px 16px;
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.12);
+}
+.stat .num{
+  font-size:clamp(2rem,4vw,2.6rem);font-weight:700;
+  color:var(--gold-2);line-height:1;letter-spacing:-.03em;
+  margin-bottom:10px;
+}
+.stat .num sup{font-size:.5em;font-weight:600}
+.stat .lbl{
+  font-size:13px;color:rgba(255,255,255,.75);font-weight:500;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-list{max-width:820px;margin:0 auto}
+.faq-item{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);margin-bottom:12px;
+  overflow:hidden;transition:border-color .2s;
+}
+.faq-item.open{border-color:var(--gold-2)}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  gap:20px;padding:20px 24px;text-align:left;
+  font-size:15.5px;font-weight:600;color:var(--ink);
+  transition:color .2s;
+}
+.faq-item.open .faq-q{color:var(--gold)}
+.faq-q i{
+  width:22px;height:22px;flex:none;position:relative;border-radius:50%;
+  background:var(--gold-bg);transition:background .25s;
+}
+.faq-item.open .faq-q i{background:var(--gold)}
+.faq-q i::before,.faq-q i::after{
+  content:'';position:absolute;background:var(--gold);
+  border-radius:2px;transition:all .3s ease;
+}
+.faq-item.open .faq-q i::before,.faq-item.open .faq-q i::after{background:#fff}
+.faq-q i::before{top:50%;left:6px;width:10px;height:2px;transform:translateY(-50%)}
+.faq-q i::after{left:50%;top:6px;width:2px;height:10px;transform:translateX(-50%)}
+.faq-item.open .faq-q i::after{opacity:0;transform:translateX(-50%) rotate(90deg)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease;
+}
+.faq-a-inner{
+  padding:0 24px 22px;
+  font-size:14.5px;color:var(--muted);line-height:1.75;
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact{background:var(--surface);border-top:1px solid var(--border)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(32px,5vw,64px);align-items:start;
+}
+.contact h2{
+  font-size:clamp(1.7rem,3.5vw,2.3rem);font-weight:700;
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:16px;
+}
+.contact > .contact-grid > div > p{
+  font-size:15.5px;color:var(--muted);line-height:1.75;
+  margin-bottom:28px;
+}
+
+.contact-methods{display:flex;flex-direction:column;gap:14px}
+.contact-method{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 20px;border-radius:var(--radius);
+  background:var(--bg);border:1px solid var(--border);
+  transition:all .2s ease;
+}
+.contact-method:hover{
+  border-color:var(--gold-2);background:var(--surface);
+  transform:translateX(4px);
+}
+.cm-icon{
+  width:44px;height:44px;flex:none;border-radius:10px;
+  display:grid;place-items:center;color:#fff;
+}
+.cm-icon.phone{background:var(--gold)}
+.cm-icon.whatsapp{background:var(--whatsapp)}
+.cm-icon.email{background:var(--navy)}
+.cm-icon.location{background:var(--iaf)}
+.cm-icon svg{width:20px;height:20px}
+.cm-text span{
+  display:block;font-size:11.5px;font-weight:600;
+  color:var(--dim);text-transform:uppercase;
+  letter-spacing:.06em;margin-bottom:3px;
+}
+.cm-text strong{
+  display:block;font-size:15px;font-weight:600;color:var(--ink);
+}
+
+.contact-form{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius);padding:clamp(24px,3.5vw,36px);
+}
+.contact-form h3{
+  font-size:1.15rem;font-weight:700;margin-bottom:6px;
+}
+.contact-form .form-sub{
+  font-size:13.5px;color:var(--muted);margin-bottom:24px;
+}
+.form-group{margin-bottom:16px}
+.form-group label{
+  display:block;font-size:12.5px;font-weight:600;
+  color:var(--ink-2);margin-bottom:7px;
+}
+.form-group input,
+.form-group select{
+  width:100%;padding:13px 15px;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  font-size:15px;color:var(--ink);
+  transition:border-color .2s;
+  appearance:none;
+  min-height:48px;
+}
+.form-group select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235f6b7a' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 15px center;
+  padding-right:40px;
+}
+.form-group input:focus,
+.form-group select:focus{
+  outline:none;border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(184,137,63,.1);
+}
+.form-group input::placeholder{color:var(--dim)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.contact-form .btn{width:100%;margin-top:6px}
+.form-note{
+  font-size:12px;color:var(--dim);margin-top:14px;
+  line-height:1.6;text-align:center;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  background:var(--navy);color:rgba(255,255,255,.75);
+  padding:56px 0 26px;
+}
+.footer-top{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  gap:40px;margin-bottom:40px;
+}
+.footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.footer-brand .logo-mark{background:rgba(255,255,255,.1);box-shadow:none}
+.footer-brand .logo-text strong{color:#fff}
+.footer-brand .logo-text span{color:rgba(255,255,255,.6)}
+.footer p{
+  font-size:13.5px;line-height:1.75;color:rgba(255,255,255,.65);
+  max-width:38ch;
+}
+.footer h5{
+  font-size:12px;font-weight:600;color:#fff;
+  text-transform:uppercase;letter-spacing:.1em;
+  margin-bottom:18px;
+}
+.footer-links{display:flex;flex-direction:column;gap:10px}
+.footer-links a{
+  font-size:14px;color:rgba(255,255,255,.7);
+  transition:color .18s;
+}
+.footer-links a:hover{color:var(--gold-2)}
+.footer-bottom{
+  padding-top:24px;border-top:1px solid rgba(255,255,255,.1);
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;flex-wrap:wrap;
+}
+.footer-bottom small{font-size:12.5px;color:rgba(255,255,255,.5)}
+.footer-tri{display:flex;gap:6px;align-items:center}
+.footer-tri i{width:8px;height:8px;border-radius:50%;display:block}
+.footer-tri .t1{background:#8fbf6d}
+.footer-tri .t2{background:#6ab0e0}
+.footer-tri .t3{background:#7fc0e8}
+
+/* ============================================================
+   MOBILE STICKY BAR
+   ============================================================ */
+.mobile-bar{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  gap:8px;box-shadow:0 -4px 20px rgba(26,39,64,.06);
+}
+.mobile-bar a{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px;border-radius:var(--radius-sm);
+  font-size:14.5px;font-weight:600;
+  min-height:48px;
+}
+.mobile-bar a svg{width:17px;height:17px}
+.mobile-bar .mb-call{
+  background:var(--navy);color:#fff;
+}
+.mobile-bar .mb-wa{
+  background:var(--whatsapp);color:#fff;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+.fade-up{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.fade-up.in{opacity:1;transform:translateY(0)}
+.fade-up.d1{transition-delay:.08s}
+.fade-up.d2{transition-delay:.16s}
+.fade-up.d3{transition-delay:.24s}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .hero-card{max-width:520px}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
+  .instructor-grid{grid-template-columns:1fr;gap:36px}
+  .instructor-visual{max-width:520px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  .contact-grid{grid-template-columns:1fr;gap:36px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item.wide{grid-column:span 2}
+}
+
+@media(max-width:768px){
+  .header-inner{padding:12px 0}
+  .nav,.header-phone{
+    display:none;
+  }
+  .menu-toggle{display:block}
+  .header-cta .btn{display:none}
+
+  .nav.mobile-open{
+    display:flex;flex-direction:column;
+    position:fixed;top:70px;left:0;right:0;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    padding:16px var(--pad) 24px;
+    gap:4px;
+    box-shadow:var(--shadow-lg);
+    z-index:99;
+  }
+  .nav.mobile-open a{
+    padding:14px 16px;font-size:16px;
+    border-radius:var(--radius-sm);
+  }
+  .nav.mobile-open .mobile-phone{
+    display:flex !important;
+    align-items:center;gap:10px;
+    margin-top:8px;padding:14px 16px;
+    background:var(--navy);color:#fff;
+    border-radius:var(--radius-sm);
+    font-weight:600;
+  }
+  .nav.mobile-open .mobile-phone svg{width:17px;height:17px;color:var(--gold)}
+
+  .hero{padding:40px 0 70px;background-attachment:scroll}
+  .hero h1{font-size:clamp(1.9rem,7.5vw,2.4rem)}
+  .hero-facts{gap:22px}
+  .hero-fact b{font-size:1.35rem}
+  .hero-cta .btn{flex:1;min-width:0}
+
+  .strip-grid{grid-template-columns:1fr;gap:10px}
+
+  .courses-grid{grid-template-columns:1fr}
+  .course{padding:20px}
+  .course-img{height:150px}
+
+  .why-grid{grid-template-columns:1fr;gap:8px}
+  .why-item{text-align:left;display:flex;gap:16px;padding:20px 16px}
+  .why-icon{margin:0;width:48px;height:48px;flex:none}
+  .why-icon svg{width:22px;height:22px}
+
+  .process-grid{grid-template-columns:1fr}
+
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-item.wide{grid-column:span 1}
+
+  .stats-section{background-attachment:scroll}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .stat{padding:24px 12px}
+  .stat .num{font-size:1.75rem}
+
+  .cred-highlight{grid-template-columns:1fr;gap:18px;text-align:left}
+  .cred-highlight .ch-item{
+    display:flex;align-items:baseline;gap:14px;
+    text-align:left;
+  }
+  .cred-highlight .ch-num{font-size:1.6rem;margin-bottom:0}
+
+  .form-row{grid-template-columns:1fr}
+
+  .footer{padding-bottom:100px}
+  .footer-top{grid-template-columns:1fr;gap:32px}
+
+  .mobile-bar{display:flex}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .fade-up{opacity:1;transform:none}
+}
+</style>
+<style id="mobile-fix">
+/* ============================================================
+   MOBILE FIX PASS — overrides everything below 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* --- Kill the Jai Hind pill in header (too tight on phones) --- */
+  .header-jai { display: none !important; }
+
+  /* --- Header --- */
+  .header-inner { padding: 10px 0 !important; gap: 10px !important; }
+  .logo { gap: 9px !important; }
+  .logo-mark { width: 38px !important; height: 38px !important; }
+  .logo-mark svg { width: 20px !important; height: 20px !important; }
+  .logo-text strong { font-size: 14px !important; line-height: 1.15 !important; }
+  .logo-text span { font-size: 9.5px !important; }
+  .menu-toggle { width: 42px !important; height: 42px !important; flex-shrink: 0 !important; }
+  .header-cta { gap: 6px !important; }
+
+  /* --- Hero --- */
+  .hero {
+    padding: 36px 0 60px !important;
+    background-attachment: scroll !important;
+  }
+  .hero-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
+  .hero h1 { font-size: clamp(1.7rem, 7.2vw, 2.3rem) !important; line-height: 1.15 !important; }
+  .hero h1 .hl { white-space: normal !important; }
+  .hero-lede { font-size: 14.5px !important; margin-bottom: 24px !important; }
+  .hero-cta { flex-direction: column !important; gap: 10px !important; margin-bottom: 28px !important; }
+  .hero-cta .btn { width: 100% !important; }
+  .hero-facts { gap: 18px !important; flex-wrap: wrap !important; padding-top: 22px !important; }
+  .hero-fact b { font-size: 1.25rem !important; }
+  .hero-fact span { font-size: 11.5px !important; }
+  .hero-card { padding: 22px 20px !important; }
+  .hero-card h3 { font-size: 1.05rem !important; }
+  .hero-card .sub { font-size: 12.5px !important; }
+  .cred-row .name { font-size: 13px !important; }
+  .cred-row .name small { font-size: 10.5px !important; }
+  .cred-row .count { font-size: 1.55rem !important; }
+
+  /* --- Services strip --- */
+  .services-strip { padding: 24px 0 !important; }
+  .strip-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .strip-item { padding: 14px 16px !important; gap: 12px !important; }
+  .strip-icon { width: 44px !important; height: 44px !important; border-radius: 10px !important; }
+  .strip-icon svg { width: 22px !important; height: 22px !important; }
+  .strip-text strong { font-size: 14.5px !important; }
+  .strip-text span { font-size: 11.5px !important; }
+  .strip-motto { font-size: 11px !important; }
+
+  /* --- Section headers --- */
+  .section { padding: 50px 0 !important; }
+  .section-head { margin-bottom: 32px !important; }
+  .section-head h2 { font-size: clamp(1.5rem, 6.5vw, 2rem) !important; }
+  .section-head p { font-size: 14.5px !important; }
+
+  /* --- Courses --- */
+  .courses-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .course { padding: 20px !important; }
+  .course-img { height: 160px !important; margin-bottom: 16px !important; }
+  .course h3 { font-size: 1.15rem !important; }
+  .course .sub { font-size: 12.5px !important; margin-bottom: 18px !important; }
+  .course-meta { gap: 12px 14px !important; padding: 16px 0 !important; margin-bottom: 16px !important; }
+  .meta-item .lbl { font-size: 10.5px !important; }
+  .meta-item .val { font-size: 13px !important; }
+  .course-cta { font-size: 13px !important; }
+
+  /* --- Why us --- */
+  .why-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+  .why-item {
+    text-align: left !important;
+    padding: 18px !important;
+    display: flex !important;
+    gap: 14px !important;
+    align-items: flex-start !important;
+  }
+  .why-icon { margin: 0 !important; width: 44px !important; height: 44px !important; flex-shrink: 0 !important; border-radius: 12px !important; }
+  .why-icon svg { width: 22px !important; height: 22px !important; }
+  .why-item h4 { font-size: 1rem !important; margin-bottom: 6px !important; }
+  .why-item p { font-size: 13.5px !important; line-height: 1.6 !important; }
+
+  /* --- Instructor --- */
+  .instructor-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .instructor-visual { padding: 20px !important; }
+  .instructor-photo { height: 220px !important; margin-bottom: 18px !important; }
+  .instructor-visual h3 { font-size: 1.25rem !important; }
+  .instructor-visual .role { font-size: 13px !important; margin-bottom: 18px !important; }
+  .instructor-visual .tagline { font-size: 13.5px !important; padding-top: 18px !important; }
+  .instructor-content h2 { font-size: clamp(1.4rem, 5.8vw, 1.8rem) !important; }
+  .instructor-content > p { font-size: 14.5px !important; line-height: 1.7 !important; }
+  .cred-highlight {
+    grid-template-columns: 1fr !important;
+    padding: 18px !important;
+    gap: 14px !important;
+    margin: 20px 0 !important;
+  }
+  .cred-highlight .ch-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    text-align: left !important;
+  }
+  .cred-highlight .ch-num { font-size: 1.5rem !important; margin-bottom: 0 !important; }
+  .cred-highlight .ch-lbl { font-size: 11px !important; line-height: 1.3 !important; }
+  .cred-highlight .ch-lbl br { display: none !important; }
+
+  /* --- Process --- */
+  .process-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .step { padding: 22px 18px !important; }
+  .step h4 { font-size: 1rem !important; }
+  .step p { font-size: 13.5px !important; }
+
+  /* --- Gallery --- */
+  .gallery-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .gallery-item { aspect-ratio: 4/3 !important; }
+  .gallery-item.wide { grid-column: span 1 !important; }
+  .gallery-item.tall { grid-row: span 1 !important; }
+  .gallery-label { font-size: 13px !important; bottom: 12px !important; left: 14px !important; right: 14px !important; }
+
+  /* --- Stats --- */
+  .stats-section { background-attachment: scroll !important; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  .stat { padding: 20px 10px !important; }
+  .stat .num { font-size: 1.6rem !important; }
+  .stat .lbl { font-size: 11px !important; }
+
+  /* --- FAQ --- */
+  .faq-list { padding-inline: 0 !important; }
+  .faq-q { font-size: 14px !important; padding: 16px 18px !important; gap: 14px !important; }
+  .faq-q i { width: 20px !important; height: 20px !important; }
+  .faq-a-inner { padding: 0 18px 18px !important; font-size: 13.5px !important; }
+
+  /* --- Contact --- */
+  .contact-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+  .contact h2 { font-size: clamp(1.5rem, 6vw, 1.9rem) !important; }
+  .contact > .contact-grid > div > p { font-size: 14.5px !important; }
+  .contact-method { padding: 14px 16px !important; gap: 14px !important; }
+  .cm-icon { width: 40px !important; height: 40px !important; }
+  .cm-icon svg { width: 18px !important; height: 18px !important; }
+  .cm-text strong { font-size: 13.5px !important; word-break: break-word !important; }
+  .cm-text span { font-size: 10.5px !important; }
+  .contact-form { padding: 22px 18px !important; }
+  .contact-form h3 { font-size: 1.05rem !important; }
+  .form-row { grid-template-columns: 1fr !important; }
+  .form-group label { font-size: 12px !important; }
+  .form-group input,
+  .form-group select { font-size: 14px !important; padding: 12px 14px !important; }
+
+  /* --- Footer --- */
+  .footer { padding: 40px 0 100px !important; }
+  .footer-top { grid-template-columns: 1fr !important; gap: 28px !important; margin-bottom: 28px !important; }
+  .footer-services { grid-template-columns: 1fr !important; gap: 16px !important; margin-bottom: 28px !important; }
+  .footer-service { gap: 12px !important; }
+  .footer-service .crest { width: 30px !important; height: 30px !important; }
+  .footer-service-name { font-size: 13px !important; }
+  .footer-service-motto { font-size: 10.5px !important; }
+  .footer p { font-size: 13px !important; }
+  .footer h5 { font-size: 11px !important; margin-bottom: 14px !important; }
+  .footer-links { gap: 8px !important; }
+  .footer-links a { font-size: 13.5px !important; }
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+    padding-top: 20px !important;
+  }
+  .footer-bottom small { font-size: 11.5px !important; }
+  .footer-bottom .jai-hind { order: -1 !important; font-size: 13px !important; }
+
+  /* --- Mobile bar --- */
+  .mobile-bar a { font-size: 13.5px !important; padding: 11px !important; gap: 6px !important; }
+  .mobile-bar a svg { width: 16px !important; height: 16px !important; }
+
+  /* --- Global safety --- */
+  html, body { overflow-x: hidden !important; max-width: 100% !important; }
+  .container { padding-inline: 18px !important; }
+  img, svg { max-width: 100% !important; }
+  section, .hero, .contact, .footer { overflow-x: hidden !important; }
+  * { -webkit-tap-highlight-color: transparent !important; }
+}
+
+/* --- Extra-narrow phones --- */
+@media (max-width: 400px) {
+  .hero h1 { font-size: 1.55rem !important; }
+  .section-head h2 { font-size: 1.35rem !important; }
+  .hero-fact b { font-size: 1.1rem !important; }
+  .logo-text strong { font-size: 13px !important; }
+  .logo-text span { font-size: 9px !important; }
+}
+</style>
+<style id="custom-branding">
+  /* Fix the logo container */
+  .logo-mark {
+    background: transparent !important;
+    box-shadow: none !important;
+    width: 44px !important; 
+    height: 44px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Make the image fit perfectly */
+  .logo-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  /* Make the logo white in the dark footer */
+  .footer-brand .logo-mark img {
+    filter: brightness(0) invert(1);
+  }
+</style>
+<style id="layout-fix">
+  /* Force logo text to stay on one line */
+  .logo-text strong { 
+    white-space: nowrap !important; 
+    font-size: 15px !important; 
+  }
+  .logo-text span { 
+    white-space: nowrap !important; 
+  }
+  
+  /* Stop the Jai Hind and Phone number from wrapping */
+  .header-jai, .header-phone { 
+    white-space: nowrap !important; 
+  }
+  
+  /* Give the logo a clean look (works if it's a black logo on transparent/white) */
+  .logo-mark {
+    mix-blend-mode: multiply; /* Blends white backgrounds away */
+    background: transparent !important;
+  }
+  
+  /* Make sure the header has enough room */
+  .header-inner {
+    gap: 20px !important;
+  }
+  
+  /* If the screen is small, hide the phone number in the header so it doesn't break */
+  @media (max-width: 1100px) {
+    .header-phone { display: none !important; }
+  }
+</style>
+<style id="layout-fix-2">
+  /* Make logo significantly bigger */
+  .logo-mark {
+    width: 56px !important;
+    height: 56px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    mix-blend-mode: normal !important;
+  }
+  .logo-mark img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+  
+  /* Kill the weird yellow highlight block behind 'uniform' */
+  .hero h1 .hl::after {
+    display: none !important;
+  }
+  
+  /* Adjust header padding to fit the bigger logo */
+  .header-inner {
+    padding: 8px 0 !important;
+  }
+</style>
+<style id="logo-final-fix">
+  /* Make the logo badge larger */
+  .logo-mark {
+    width: 56px !important;
+    height: 56px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    mix-blend-mode: normal !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo-mark img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block;
+  }
+  
+  /* Ensure the dark footer inverts the logo to white so it's visible */
+  .footer-brand .logo-mark img {
+    filter: brightness(0) invert(1) !important;
+  }
+
+  /* Make sure the header has enough vertical padding for the bigger logo */
+  .header-inner {
+    padding: 6px 0 !important; 
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header">
+  <div class="tri-bar"><span class="t-army"></span><span class="t-navy"></span><span class="t-iaf"></span></div>
+  <div class="container">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark"><img src="https://iili.io/njVKDxI.png" alt="Trishul Defence Logo"></span>
+        <span class="logo-text">
+          <strong>Trishul Defence </strong>
+          <span>Bhim, Rajasthan</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#courses">Courses</a>
+        <a href="#why">Why Us</a>
+        <a href="#instructor">Instructor</a>
+        <a href="#process">Process</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="tel:+919999999999" class="mobile-phone" style="display:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 99999 99999
+        </a>
+      </nav>
+
+      <div class="header-cta"><span class="header-jai">Jai Hind</span>
+        <a href="tel:+919999999999" class="header-phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 99999 99999
+        </a>
+        <a href="#contact" class="btn btn-primary">Enrol Now</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy fade-up">
+        <span class="hero-badge">
+          <span class="dots"><i class="d1"></i><i class="d2"></i><i class="d3"></i></span>
+          Army · Navy · Air Force
+        </span>
+        <h1>
+          Your path to the <span class="hl">uniform</span> starts in Bhim.
+        </h1>
+        <p class="hero-lede">
+          <strong>Complete defence preparation</strong> — written exam, physical training, medical guidance and final merit. All under one roof at Trishul Defence .
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            Book a Free Visit
+          </a>
+          <a href="#courses" class="btn btn-outline">
+            View Courses
+          </a>
+        </div>
+
+        <div class="hero-facts">
+          <div class="hero-fact">
+            <b>4</b>
+            <span>Trade programs</span>
+          </div>
+          <div class="hero-fact">
+            <b>14</b>
+            <span>Exam clearances</span>
+          </div>
+          <div class="hero-fact">
+            <b>100%</b>
+            <span>Personal guidance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card fade-up d2">
+        <h3>Meet Your Instructor</h3>
+        <p class="sub">Years of first-hand experience across three services</p>
+
+        <div class="cred-list">
+          <div class="cred-row">
+            <div class="name">
+              AFCAT
+              <small>Air Force Common Admission Test</small>
+            </div>
+            <div class="count">8<sup>×</sup></div>
+          </div>
+          <div class="cred-row">
+            <div class="name">
+              CDS
+              <small>Combined Defence Services</small>
+            </div>
+            <div class="count">4<sup>×</sup></div>
+          </div>
+          <div class="cred-row">
+            <div class="name">
+              CGCAT
+              <small>Coast Guard Admission Test</small>
+            </div>
+            <div class="count">2<sup>×</sup></div>
+          </div>
+        </div>
+
+        <div class="foot">
+          <strong>14 written exam clearances</strong> across the Indian Armed Forces. Learn from someone who's cleared the exam — not just taught it.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES STRIP ===================== -->
+<div class="services-strip">
+  <div class="container">
+    <div class="strip-grid">
+      <div class="strip-item army fade-up">
+        <span class="strip-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+            <path d="M12 2.5 L20 6 v6 c0 5-3.5 8.5-8 9.5 C7.5 20.5 4 17 4 12 V6 Z"/>
+          </svg>
+        </span>
+        <div class="strip-text">
+          <strong>Indian Army</strong>
+          <span class="strip-motto">Service Before Self</span>
+        </div>
+      </div>
+      <div class="strip-item navy fade-up d1">
+        <span class="strip-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="5" r="2"/>
+            <path d="M12 7v10"/>
+            <path d="M5 12H3M21 12h-2"/>
+            <path d="M12 17c-4 0-7-3-7-7M12 17c4 0 7-3 7-7"/>
+          </svg>
+        </span>
+        <div class="strip-text">
+          <strong>Indian Navy</strong>
+          <span class="strip-motto">Sham No Varunah</span>
+        </div>
+      </div>
+      <div class="strip-item iaf fade-up d2">
+        <span class="strip-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+            <path d="M3 12 L21 4 L13 21 L10 13 Z"/>
+          </svg>
+        </span>
+        <div class="strip-text">
+          <strong>Indian Air Force</strong>
+          <span class="strip-motto">Nabha Sparsham Deeptam</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== COURSES ===================== -->
+<section class="section" id="courses">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="eyebrow">Our Courses</span>
+      <h2>Choose your path. We'll walk it with you.</h2>
+      <p>Four programs across three services. Each one prepares you from written exam to final selection.</p>
+    </div>
+
+    <div class="courses-grid">
+
+      <article class="course army fade-up">
+        <img src="https://nationalwarmemorial.org/images/a/a9/Indian_Army-Sikh_Light_Infantry_regiment.jpeg.jpg" alt="Indian Army Agniveer GD training" class="course-img" loading="lazy">
+        <span class="course-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2.5 L20 6 v6 c0 5-3.5 8.5-8 9.5 C7.5 20.5 4 17 4 12 V6 Z"/></svg>
+          Indian Army
+        </span>
+        <h3>Agniveer GD</h3>
+        <p class="sub">General Duty · 10th Pass</p>
+        <div class="course-meta">
+          <div class="meta-item">
+            <div class="lbl">Age</div>
+            <div class="val">17½ – 21 yrs</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Exam</div>
+            <div class="val">CEE (Offline)</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Physical</div>
+            <div class="val">1.6 km · Pull-ups</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Service</div>
+            <div class="val">4 Yrs + 15%</div>
+          </div>
+        </div>
+        <a href="#contact" class="course-cta">
+          Enquire about this course
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="course army fade-up d1">
+        <img src="https://nationalwarmemorial.org/images/0/0c/Exercise_Shakti_-_ASMI_gun_being_shown_to_visiting_French_soldier.jpg" alt="Indian Army Technical Clerk training" class="course-img" loading="lazy">
+        <span class="course-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2.5 L20 6 v6 c0 5-3.5 8.5-8 9.5 C7.5 20.5 4 17 4 12 V6 Z"/></svg>
+          Indian Army
+        </span>
+        <h3>Technical &amp; Clerk</h3>
+        <p class="sub">Technical / Clerk · 10+2</p>
+        <div class="course-meta">
+          <div class="meta-item">
+            <div class="lbl">Age</div>
+            <div class="val">17½ – 21 yrs</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Exam</div>
+            <div class="val">CEE (Offline)</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Subject</div>
+            <div class="val">PCM / Any Stream</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Service</div>
+            <div class="val">4 Yrs + 15%</div>
+          </div>
+        </div>
+        <a href="#contact" class="course-cta">
+          Enquire about this course
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="course navy fade-up">
+        <img src="https://nationalwarmemorial.org/images/8/8b/INS_Kalvari_%28S21%29_at_sea.jpg" alt="Indian Navy SSR AA training" class="course-img" loading="lazy">
+        <span class="course-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v10M5 12H3M21 12h-2M12 17c-4 0-7-3-7-7M12 17c4 0 7-3 7-7"/></svg>
+          Indian Navy
+        </span>
+        <h3>SSR &amp; AA</h3>
+        <p class="sub">Senior Secondary Recruit / Artificer Apprentice</p>
+        <div class="course-meta">
+          <div class="meta-item">
+            <div class="lbl">Age</div>
+            <div class="val">17 – 21 yrs</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Exam</div>
+            <div class="val">Computer Based</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Subject</div>
+            <div class="val">PCM / Bio / CS</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Physical</div>
+            <div class="val">1.6 km · Squats</div>
+          </div>
+        </div>
+        <a href="#contact" class="course-cta">
+          Enquire about this course
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="course iaf fade-up d1">
+        <img src="https://nationalwarmemorial.org/images/0/09/IAF_LCH-Image3.jpg" alt="IAF Agniveer Vayu training" class="course-img" loading="lazy">
+        <span class="course-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M3 12 L21 4 L13 21 L10 13 Z"/></svg>
+          Indian Air Force
+        </span>
+        <h3>Agniveer Vayu</h3>
+        <p class="sub">X &amp; Y Trades · 10+2</p>
+        <div class="course-meta">
+          <div class="meta-item">
+            <div class="lbl">Age</div>
+            <div class="val">17½ – 21 yrs</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Exam</div>
+            <div class="val">Online Test</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Subject</div>
+            <div class="val">PCM / Any Stream</div>
+          </div>
+          <div class="meta-item">
+            <div class="lbl">Physical</div>
+            <div class="val">1.6 km Run</div>
+          </div>
+        </div>
+        <a href="#contact" class="course-cta">
+          Enquire about this course
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY US ===================== -->
+<section class="section why" id="why">
+  <div class="container">
+    <div class="section-head center fade-up">
+      <span class="eyebrow">Why Choose Us</span>
+      <h2>Serious preparation. Personal attention.</h2>
+      <p>We are a small academy with a simple promise: you won't be lost in a crowd.</p>
+    </div>
+
+    <div class="why-grid">
+
+      <div class="why-item fade-up">
+        <span class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <path d="M22 4 L12 14.01 L9 11.01"/>
+          </svg>
+        </span>
+        <h4>Complete Preparation</h4>
+        <p>Written exam, physical training, medical guidance and merit — all stages covered under one roof.</p>
+      </div>
+
+      <div class="why-item fade-up d1">
+        <span class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <h4>Small Batches</h4>
+        <p>Personal attention for every student. No crowded halls, no recorded lectures sold as live coaching.</p>
+      </div>
+
+      <div class="why-item fade-up d2">
+        <span class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="6"/>
+            <path d="M15.477 12.89 L17 22 L12 19 L7 22 L8.523 12.89"/>
+          </svg>
+        </span>
+        <h4>Experienced Instructor</h4>
+        <p>Learn from someone with 14 written clearances across AFCAT, CDS and CGCAT — first-hand exam experience.</p>
+      </div>
+
+      <div class="why-item fade-up d3">
+        <span class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </span>
+        <h4>Right Here in Bhim</h4>
+        <p>Local academy for local students. No need to leave your town to get serious defence preparation.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INSTRUCTOR ===================== -->
+<section class="section" id="instructor">
+  <div class="container">
+    <div class="instructor-grid">
+
+      <div class="instructor-visual fade-up">
+        <img src="photo_2026-10-17_13-04-51.jpg" alt="Trishul Defence  instructor" class="instructor-photo" loading="lazy">
+        <h3>Lead Instructor</h3>
+        <p class="role">Trishul Defence  · Bhim</p>
+        <p class="tagline">
+          "I've sat in the same exam halls you will. I know what works — and what doesn't. My job is to make sure you walk out of here prepared, not just hopeful."
+        </p>
+      </div>
+
+      <div class="instructor-content fade-up d1">
+        <span class="eyebrow">About the Instructor</span>
+        <h2>Taught by someone who's cleared it. Repeatedly.</h2>
+        <p>
+          Trishul Defence  is led by an instructor with <strong>first-hand experience</strong> across India's armed forces entrance exams. Not a retired officer teaching from old notes — an active qualifier who knows what today's exams actually look like.
+        </p>
+        <p>
+          Having cleared <strong>AFCAT eight times, CDS four times and CGCAT twice</strong>, the guidance here comes from someone who has repeatedly faced the exam, the ground and the medical room — and passed.
+        </p>
+
+        <div class="cred-highlight">
+          <div class="ch-item">
+            <div class="ch-num">8</div>
+            <div class="ch-lbl">AFCAT<br>Clearances</div>
+          </div>
+          <div class="ch-item">
+            <div class="ch-num">4</div>
+            <div class="ch-lbl">CDS<br>Clearances</div>
+          </div>
+          <div class="ch-item">
+            <div class="ch-num">2</div>
+            <div class="ch-lbl">CGCAT<br>Clearances</div>
+          </div>
+        </div>
+
+        <p>
+          This is a young academy, and that's intentional. Every student gets real attention. If you're serious about Army, Navy or Air Force — this is where the work happens.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROCESS ===================== -->
+<section class="section process" id="process">
+  <div class="container">
+    <div class="section-head center fade-up">
+      <span class="eyebrow">The Complete Path</span>
+      <h2>From written exam to final merit.</h2>
+      <p>Most academies stop at the written test. We walk with you through every stage.</p>
+    </div>
+
+    <div class="process-grid">
+
+      <div class="step fade-up">
+        <span class="step-num">01</span>
+        <h4>Written Exam Coaching</h4>
+        <p>Subject-wise preparation for CEE, Navy CBT and IAF online test. Weekly mock tests in real exam pattern.</p>
+      </div>
+
+      <div class="step fade-up d1">
+        <span class="step-num">02</span>
+        <h4>Physical Training</h4>
+        <p>Daily ground training — 1.6 km run, pull-ups, ditch jump and stamina building. Timed practice sessions.</p>
+      </div>
+
+      <div class="step fade-up d2">
+        <span class="step-num">03</span>
+        <h4>Medical Guidance</h4>
+        <p>Pre-medical screening and prep so nothing surprises you at the military hospital. Vision, dental and general health.</p>
+      </div>
+
+      <div class="step fade-up d3">
+        <span class="step-num">04</span>
+        <h4>Final Selection</h4>
+        <p>Merit list preparation, document verification and post-selection guidance — all the way to your joining letter.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section class="section gallery" id="gallery">
+  <div class="container">
+    <div class="section-head center fade-up">
+      <span class="eyebrow">Life at Trishul</span>
+      <h2>Where preparation becomes pride.</h2>
+      <p>Training grounds, classrooms and the spirit that drives our students.</p>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="section stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat fade-up">
+        <div class="num">4</div>
+        <div class="lbl">Trade Programs</div>
+      </div>
+      <div class="stat fade-up d1">
+        <div class="num">14</div>
+        <div class="lbl">Exam Clearances</div>
+      </div>
+      <div class="stat fade-up d2">
+        <div class="num">3</div>
+        <div class="lbl">Armed Forces Covered</div>
+      </div>
+      <div class="stat fade-up d3">
+        <div class="num">100<sup>%</sup></div>
+        <div class="lbl">Personal Guidance</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="section" id="faq" style="background:var(--surface);border-block:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head center fade-up">
+      <span class="eyebrow">Questions</span>
+      <h2>Answers before you join.</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item fade-up">
+        <button class="faq-q">
+          Where is Trishul Defence  located?
+          <i></i>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            We are based in Bhim, Rajasthan. Exact address and directions are shared on enquiry — since batches are small and personal, we prefer to talk to every student before they join.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up d1">
+        <button class="faq-q">
+          Do you provide hostel or accommodation?
+          <i></i>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            Accommodation support is available for outstation students. Get in touch with your requirement and we'll help you arrange a safe, nearby place to stay while you train.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up d2">
+        <button class="faq-q">
+          Is coaching only for the written exam?
+          <i></i>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            No — this is what makes us different. We prepare you for the complete journey: written exam, physical test, medical and final merit. Ground training is part of the regular schedule, not an add-on.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up d3">
+        <button class="faq-q">
+          Can 10th pass students join?
+          <i></i>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            Yes. Army Agniveer GD is open to 10th pass candidates. If you've cleared 10+2, you also become eligible for Technical, Clerk, Navy SSR/AA and IAF Agniveer Vayu. Contact us and we'll guide you to the right program.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-up d3">
+        <button class="faq-q">
+          What if I've failed a physical test before?
+          <i></i>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            That's exactly why ground training exists. Most candidates fail physicals not because they're unfit, but because they've never trained specifically for these standards. With structured daily PT, we fix that.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="fade-up">
+        <span class="eyebrow">Get in Touch</span>
+        <h2>Ready to start? Let's talk.</h2>
+        <p>
+          Send us your details and we'll get back with batch timings, fees and everything you need to begin. Or just call — we answer.
+        </p>
+
+        <div class="contact-methods">
+          <a href="tel:+919999999999" class="contact-method">
+            <span class="cm-icon phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <span class="cm-text">
+              <span>Call us</span>
+              <strong>+91 99999 99999</strong>
+            </span>
+          </a>
+
+          <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="contact-method">
+            <span class="cm-icon whatsapp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.8-.9-2.05-1-.28-.1-.48-.15-.68.15-.2.3-.78 1-.95 1.2-.18.2-.35.22-.65.08-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.5-.5-.68-.5h-.58c-.2 0-.53.07-.8.37-.28.3-1.05 1.02-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.3 1.28.5 1.72.65.72.23 1.38.2 1.9.12.58-.08 1.8-.73 2.05-1.44.25-.7.25-1.32.18-1.44-.08-.13-.28-.2-.58-.35zM12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.06L2 22l5.06-1.34A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </span>
+            <span class="cm-text">
+              <span>WhatsApp</span>
+              <strong>Chat with us</strong>
+            </span>
+          </a>
+
+          <a href="mailto:contact@Trishuldefence.com" class="contact-method">
+            <span class="cm-icon email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            </span>
+            <span class="cm-text">
+              <span>Email</span>
+              <strong>contact@Trishuldefence.com</strong>
+            </span>
+          </a>
+
+          <div class="contact-method">
+            <span class="cm-icon location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <span class="cm-text">
+              <span>Location</span>
+              <strong>Bhim, Rajasthan</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form fade-up d1" id="enqForm" novalidate>
+        <h3>Send an Enquiry</h3>
+        <p class="form-sub">We'll reply on WhatsApp with batch details and fees.</p>
+
+        <div class="form-group">
+          <label for="fname">Your Name</label>
+          <input type="text" id="fname" placeholder="Full name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fphone">Phone</label>
+            <input type="tel" id="fphone" placeholder="10-digit mobile" inputmode="numeric" required>
+          </div>
+          <div class="form-group">
+            <label for="fage">Age</label>
+            <input type="number" id="fage" placeholder="e.g. 18" inputmode="numeric" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ftrade">Interested Course</label>
+          <select id="ftrade" required>
+            <option value="">Select a course</option>
+            <option>Army Agniveer GD</option>
+            <option>Army Technical / Clerk</option>
+            <option>Navy SSR / AA</option>
+            <option>IAF Agniveer Vayu X &amp; Y</option>
+            <option>Not sure — need guidance</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.8-.9-2.05-1-.28-.1-.48-.15-.68.15-.2.3-.78 1-.95 1.2-.18.2-.35.22-.65.08-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.5-.5-.68-.5h-.58c-.2 0-.53.07-.8.37-.28.3-1.05 1.02-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.3 1.28.5 1.72.65.72.23 1.38.2 1.9.12.58-.08 1.8-.73 2.05-1.44.25-.7.25-1.32.18-1.44-.08-.13-.28-.2-.58-.35zM12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.06L2 22l5.06-1.34A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          Send on WhatsApp
+        </button>
+
+        <p class="form-note">Your details will open in WhatsApp for you to review before sending. No spam, ever.</p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <span class="logo-mark"><img src="https://iili.io/njVKDxI.png" alt="Trishul Defence Logo"></span>
+          <span class="logo-text">
+            <strong>Trishul Defence </strong>
+            <span>Bhim, Rajasthan</span>
+          </span>
+        </div>
+        <p>Complete preparation for Indian Army, Navy and Air Force entries — written exam, physical training, medical and final merit.</p>
+      </div>
+
+      <div>
+        <h5>Courses</h5>
+        <div class="footer-links">
+          <a href="#courses">Army Agniveer GD</a>
+          <a href="#courses">Army Technical &amp; Clerk</a>
+          <a href="#courses">Navy SSR &amp; AA</a>
+          <a href="#courses">IAF Agniveer Vayu</a>
+        </div>
+      </div>
+
+      <div>
+        <h5>Quick Links</h5>
+        <div class="footer-links">
+          <a href="#why">Why Choose Us</a>
+          <a href="#instructor">Instructor</a>
+          <a href="#process">The Process</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <small>© 2026 Trishul Defence  · Bhim, Rajasthan</small>
+      <div class="footer-tri">
+        <i class="t1"></i><i class="t2"></i><i class="t3"></i>
+      </div>
+      <small>Army · Navy · Air Force</small>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== MOBILE BAR ===================== -->
+<div class="mobile-bar">
+  <a href="tel:+919999999999" class="mb-call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Call Now
+  </a>
+  <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="mb-wa">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.8-.9-2.05-1-.28-.1-.48-.15-.68.15-.2.3-.78 1-.95 1.2-.18.2-.35.22-.65.08-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.58-.5-.5-.68-.5h-.58c-.2 0-.53.07-.8.37-.28.3-1.05 1.02-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.3 1.28.5 1.72.65.72.23 1.38.2 1.9.12.58-.08 1.8-.73 2.05-1.44.25-.7.25-1.32.18-1.44-.08-.13-.28-.2-.58-.35zM12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.06L2 22l5.06-1.34A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+    WhatsApp
+  </a>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- Mobile menu ---------- */
+  const menuToggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('nav');
+  menuToggle.addEventListener('click', ()=>{
+    nav.classList.toggle('mobile-open');
+    menuToggle.classList.toggle('open');
+  });
+  nav.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      nav.classList.remove('mobile-open');
+      menuToggle.classList.remove('open');
+    });
+  });
+
+  /* ---------- FAQ accordion ---------- */
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(other=>{
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ---------- Fade-up on scroll ---------- */
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+
+  /* ---------- Enquiry form → WhatsApp ---------- */
+  const form = document.getElementById('enqForm');
+  const WA_NUMBER = '919999999999'; // ← replace with real number
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const name  = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const age   = document.getElementById('fage').value.trim();
+    const trade = document.getElementById('ftrade').value;
+
+    if(!name || !phone || !age || !trade){
+      alert('Please fill in all fields before sending.');
+      return;
+    }
+
+    const msg =
+`*Trishul Defence  — Enquiry*
+
+Name: ${name}
+Phone: ${phone}
+Age: ${age}
+Interested course: ${trade}
+
+Please share batch details, timings and fees.`;
+
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  });
+
+  /* ---------- Smooth anchor scroll ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href');
+      if(id === '#' || id.length < 2) return;
+      const target = document.querySelector(id);
+      if(!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({top, behavior:'smooth'});
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
