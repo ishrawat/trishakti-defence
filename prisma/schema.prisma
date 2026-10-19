@@ -7,22 +7,24 @@ datasource db {
 }
 
 model Batch {
-  id        String     @id @default(uuid())
-  name      String     @unique
-  users     User[]
-  mockTests MockTest[]
+  id            String         @id @default(uuid())
+  name          String         @unique
+  users         User[]
+  mockTests     MockTest[]
+  notifications Notification[]
 }
 
 model User {
-  id              String   @id @default(uuid())
-  email           String   @unique
-  password        String
-  name            String
-  role            String
-  initialPassword String?
-  batchId         String?
-  batch           Batch?   @relation(fields: [batchId], references: [id])
-  attempts        Attempt[]
+  id                String             @id @default(uuid())
+  email             String             @unique
+  password          String
+  name              String
+  role              String
+  initialPassword   String?
+  batchId           String?
+  batch             Batch?             @relation(fields: [batchId], references: [id])
+  attempts          Attempt[]
+  notificationReads NotificationRead[]
 }
 
 model Exam {
@@ -96,4 +98,25 @@ model Response {
   selectedOption String?
   status         String
   timeSpent      Int      @default(0)
+}
+
+model Notification {
+  id        String             @id @default(uuid())
+  title     String
+  message   String
+  createdAt DateTime           @default(now())
+  batchId   String?
+  batch     Batch?             @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  reads     NotificationRead[]
+}
+
+model NotificationRead {
+  id             String       @id @default(uuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notificationId String
+  notification   Notification @relation(fields: [notificationId], references: [id], onDelete: Cascade)
+  readAt         DateTime     @default(now())
+  
+  @@unique([userId, notificationId])
 }

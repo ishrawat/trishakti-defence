@@ -53,6 +53,9 @@ export default function AdminDashboard() {
         <h1 className="text-3xl font-bold text-blue-900">Admin / Teacher Dashboard</h1>
         
         <div className="flex flex-wrap gap-3">
+          <Link href="/teacher/notifications" className="bg-yellow-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-yellow-700 shadow-sm transition-colors flex items-center gap-2">
+            🔔 Push Notifications
+          </Link>
           <Link href="/teacher/batches" className="bg-purple-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-purple-700 shadow-sm transition-colors flex items-center gap-2">
             📦 Manage Batches
           </Link>
