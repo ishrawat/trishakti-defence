@@ -18,6 +18,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(tests);
   } catch (error: any) {
-    return NextResponse.json({ error: 'Failed to fetch tests' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch tests', details: error.message }, { status: 500 });
   }
 }

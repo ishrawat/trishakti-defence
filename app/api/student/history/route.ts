@@ -10,11 +10,11 @@ export async function GET(req: NextRequest) {
     const history = await prisma.attempt.findMany({
       where: { userId, status: 'COMPLETED' },
       include: { mockTest: true },
-      orderBy: { endTime: 'desc' }
+      orderBy: { startTime: 'desc' }
     });
 
     return NextResponse.json(history);
   } catch (error: any) {
-    return NextResponse.json({ error: 'Failed to fetch history' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch history', details: error.message }, { status: 500 });
   }
 }
