@@ -101,7 +101,7 @@ function ReviewContent() {
           </div>
           
           <div className="p-6 flex-1 overflow-y-auto">
-            <div className="text-lg mb-6 leading-relaxed"><RichTextViewer content={currentQ.text} /></div>
+            <div className="text-lg mb-6 leading-relaxed"><RichTextViewer content={String(currentQ.text || "")} /></div>
             <div className="space-y-3">
               {['A', 'B', 'C', 'D'].map((opt) => {
                 const optionText = currentQ[`option${opt}` as keyof Question];
@@ -118,7 +118,7 @@ function ReviewContent() {
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${isRightAnswer ? 'bg-green-600 text-white' : isSelected ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
                       {opt}
                     </div>
-                    <div className="text-base flex-1"><RichTextViewer content={optionText} /></div>
+                    <div className="text-base flex-1"><RichTextViewer content={String(optionText || "")} /></div>
                     
                     {/* Status Icons */}
                     {isRightAnswer && <span className="text-green-700 font-bold text-sm">✓ Correct Answer</span>}
