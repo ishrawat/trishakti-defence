@@ -244,7 +244,10 @@ export default function QuestionBuilder() {
               </div>
             </div>
 
-            <h2 className="text-lg font-bold flex justify-between items-center">
+            <div className="bg-blue-50 border border-blue-200 p-3 rounded text-sm text-blue-800 mb-2">
+  <strong>💡 Pro Tip:</strong> You can use LaTeX for math by wrapping it in <code>$</code> signs (e.g., <code>$x^2$</code>). You can add images using Markdown: <code>![alt](https://image-url.png)</code>.
+</div>
+<h2 className="text-lg font-bold flex justify-between items-center">
               {editingId ? 'Edit Question' : 'Add New Question (Manual)'}
               {editingId && <button type="button" onClick={resetForm} className="text-xs bg-gray-200 px-2 py-1 rounded">Cancel Edit</button>}
             </h2>

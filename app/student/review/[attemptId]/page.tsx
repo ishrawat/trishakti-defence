@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import RichText from '@/components/RichText';
 
 type Question = { id: string; text: string; optionA: string; optionB: string; optionC: string; optionD: string; correctOption: string; explanation?: string; positiveMarks: number; negativeMarks: number; };
 type Section = { id: string; name: string; questions: Question[] };
@@ -100,7 +101,7 @@ function ReviewContent() {
           </div>
           
           <div className="p-6 flex-1 overflow-y-auto">
-            <p className="text-lg mb-6 leading-relaxed">{currentQ.text}</p>
+            <div className="text-lg mb-6 leading-relaxed"><RichText content={currentQ.text} /></div>
             <div className="space-y-3">
               {['A', 'B', 'C', 'D'].map((opt) => {
                 const optionText = currentQ[`option${opt}` as keyof Question];
@@ -117,7 +118,7 @@ function ReviewContent() {
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${isRightAnswer ? 'bg-green-600 text-white' : isSelected ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
                       {opt}
                     </div>
-                    <span className="text-base flex-1">{optionText}</span>
+                    <div className="text-base flex-1"><RichText content={optionText || ""} /></div>
                     
                     {/* Status Icons */}
                     {isRightAnswer && <span className="text-green-700 font-bold text-sm">✓ Correct Answer</span>}
