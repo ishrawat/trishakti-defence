@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
-import RichTextViewer from '@/components/RichTextViewer';
+import dynamic from 'next/dynamic';
+const RichTextViewer = dynamic(() => import('@/components/RichTextViewer'), { ssr: false });
 
 type Question = { id: string; text: string; optionA: string; optionB: string; optionC: string; optionD: string; correctOption: string; positiveMarks: number; negativeMarks: number; };
 type Section = { id: string; name: string; duration: number; questions: Question[] };

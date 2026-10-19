@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import RichTextEditor from '@/components/RichTextEditor';
+import dynamic from 'next/dynamic';
+const RichTextEditor = dynamic(() => import('@/components/RichTextEditor'), { 
+  ssr: false,
+  loading: () => <div className="h-24 bg-gray-100 border border-gray-300 rounded animate-pulse"></div>
+});
 
 type Question = { id: string; text: string; optionA: string; optionB: string; optionC: string; optionD: string; correctOption: string; explanation: string; topic?: string; positiveMarks: number; negativeMarks: number; };
 type Section = { id: string; name: string; questions: Question[] };
