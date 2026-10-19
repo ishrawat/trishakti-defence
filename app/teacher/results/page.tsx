@@ -10,6 +10,9 @@ type Attempt = {
   endTime: string;
   status: string;
   totalScore: number;
+  userId: string;
+  tabSwitchCount: number;
+  pauseCount: number;
   user: { name: string; email: string };
   mockTest: { title: string; exam: { name: string } };
 };

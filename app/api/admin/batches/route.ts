@@ -11,12 +11,12 @@ export async function GET() {
       }
     });
 
-    const formatted = batches.map(batch => {
+    const formatted = batches.map((batch: any) => {
       let totalScore = 0;
       let totalAttempts = 0;
       
       batch.users.forEach(user => {
-        user.attempts.forEach(attempt => {
+        user.attempts.forEach((attempt: any) => {
           totalScore += attempt.totalScore;
           totalAttempts++;
         });
@@ -29,7 +29,7 @@ export async function GET() {
         averageScore: totalAttempts > 0 ? (totalScore / totalAttempts).toFixed(2) : 'N/A',
         totalAttempts,
         // Explicitly map to string array to prevent undefined errors
-        testIds: batch.mockTests.map(t => t.id) || [] 
+        testIds: batch.mockTests.map((t: any) => t.id) || [] 
       };
     });
 

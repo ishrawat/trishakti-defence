@@ -13,19 +13,32 @@ export default function StudentDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      fetch('/api/student/profile', { cache: 'no-store' }).then(res => res.json()),
-      fetch('/api/student/tests', { cache: 'no-store' }).then(res => res.json()),
-      fetch('/api/student/history', { cache: 'no-store' }).then(res => res.json())
-    ]).then(([profileData, testsData, historyData]) => {
-      if (profileData && !profileData.error) setProfile(profileData);
-      if (Array.isArray(testsData)) setTests(testsData);
-      if (Array.isArray(historyData)) setHistory(historyData);
-      setLoading(false);
-    }).catch(err => {
-      console.error("Dashboard fetch error:", err);
-      setLoading(false);
-    });
+    const fetchData = async () => {
+      try {
+        const [profileRes, testsRes, historyRes] = await Promise.all([
+          fetch('/api/student/profile', { cache: 'no-store' }),
+          fetch('/api/student/tests', { cache: 'no-store' }),
+          fetch('/api/student/history', { cache: 'no-store' })
+        ]);
+
+        if (!profileRes.ok) throw new Error('Failed to fetch profile');
+        if (!testsRes.ok) throw new Error('Failed to fetch tests');
+        if (!historyRes.ok) throw new Error('Failed to fetch history');
+
+        const profileData = await profileRes.json();
+        const testsData = await testsRes.json();
+        const historyData = await historyRes.json();
+
+        if (profileData && !profileData.error) setProfile(profileData);
+        if (Array.isArray(testsData)) setTests(testsData);
+        if (Array.isArray(historyData)) setHistory(historyData);
+      } catch (err) {
+        console.error("Dashboard fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   if (loading) {

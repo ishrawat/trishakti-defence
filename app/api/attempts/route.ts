@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
       for (const q of section.questions) {
         maxSectionScore += q.positiveMarks;
-        const savedResponse = attempt.responses.find(r => r.questionId === q.id);
+        const savedResponse = attempt.responses.find((r: any) => r.questionId === q.id);
         const selectedOption = savedResponse?.selectedOption;
 
         if (selectedOption) {

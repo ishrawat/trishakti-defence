@@ -14,7 +14,7 @@ export async function GET() {
       orderBy: { startTime: 'desc' }
     });
 
-    const formatted = attempts.map(a => ({
+    const formatted = attempts.map((a: any) => ({
       id: a.id,
       startTime: a.startTime,
       endTime: a.endTime,
