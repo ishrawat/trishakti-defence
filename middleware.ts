@@ -1,42 +1,37 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { jwtVerify } from 'jose'; // We'll use jose for edge compatibility
+import { jwtVerify } from 'jose';
 
-export async function middleware(request: NextRequest) {
-  const token = request.cookies.get('auth_token')?.value;
-  const { pathname } = request.nextUrl;
+const SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
 
-  // Allow login page and public API routes
-  if (pathname === '/login' || pathname.startsWith('/api/auth')) {
-    return NextResponse.next();
-  }
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const bearer = req.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
+  const token = bearer ?? req.cookies.get('auth_token')?.value;
 
-  // If no token, redirect to login
   if (!token) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    if (pathname.startsWith('/api/')) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   try {
-    // Verify token
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'super_secret_exam_key_123');
-    const { payload } = await jwtVerify(token, secret);
-    const role = payload.role;
+    const { payload } = await jwtVerify(token, SECRET);
+    const role = payload.role as string;
 
-    // Role-Based Access Control
     if (pathname.startsWith('/teacher') && role !== 'TEACHER') {
-      return NextResponse.redirect(new URL('/student', request.url));
+      return NextResponse.redirect(new URL('/login', req.url));
     }
-
-    if (pathname.startsWith('/student') && role !== 'STUDENT') {
-      return NextResponse.redirect(new URL('/teacher', request.url));
+    if ((pathname.startsWith('/student') || pathname.startsWith('/exam')) && role !== 'STUDENT') {
+      return NextResponse.redirect(new URL('/login', req.url));
     }
-
+    
     return NextResponse.next();
-  } catch (error) {
-    return NextResponse.redirect(new URL('/login', request.url));
+  } catch {
+    if (pathname.startsWith('/api/')) return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 }
 
 export const config = {
-  matcher: ['/teacher/:path*', '/student/:path*', '/exam/:path*'],
+  matcher: ['/student/:path*', '/exam/:path*', '/teacher/:path*', '/api/attempts/:path*'],
 };
