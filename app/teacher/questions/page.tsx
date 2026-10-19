@@ -165,6 +165,7 @@ export default function QuestionBuilder() {
       const rawData: any[] = XLSX.utils.sheet_to_json(worksheet);
 
       const formattedQuestions = rawData.map(row => ({
+        sectionName: row.Section || row.section || '', // NEW: Read section name
         text: row.Question || row.question,
         topic: row.Topic || row.topic || '',
         optionA: row.OptionA || row.optionA,
@@ -182,7 +183,11 @@ export default function QuestionBuilder() {
       const res = await fetch('/api/questions/bulk', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sectionId: selectedSectionId, questions: formattedQuestions })
+        body: JSON.stringify({ 
+          testId: selectedTestId, 
+          defaultSectionId: selectedSectionId, 
+          questions: formattedQuestions 
+        })
       });
 
       if (!res.ok) throw new Error("Failed to upload");
