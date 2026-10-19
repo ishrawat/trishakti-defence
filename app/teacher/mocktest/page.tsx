@@ -1,22 +1,20 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 type Exam = { id: string; name: string };
 type Batch = { id: string; name: string };
 
-function CreateMockTestContent() {
+export default function CreateMockTest() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const urlExamId = searchParams.get('examId');
 
   const [exams, setExams] = useState<Exam[]>([]);
   const [batches, setBatches] = useState<Batch[]>([]);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const [examId, setExamId] = useState(urlExamId || '');
+  const [examId, setExamId] = useState('');
   const [title, setTitle] = useState('');
   const [timerType, setTimerType] = useState('FULL');
   const [totalDuration, setTotalDuration] = useState('60');
@@ -25,6 +23,10 @@ function CreateMockTestContent() {
   const [selectedBatchIds, setSelectedBatchIds] = useState<string[]>([]);
 
   useEffect(() => {
+    // Read URL param safely on the client side
+    const params = new URLSearchParams(window.location.search);
+    const urlExamId = params.get('examId');
+
     const fetchData = async () => {
       try {
         const [batchesRes, examsRes] = await Promise.all([
@@ -33,16 +35,22 @@ function CreateMockTestContent() {
         ]);
 
         if (!batchesRes.ok || !examsRes.ok) {
-          throw new Error('Failed to load exams or batches.');
+          throw new Error('Failed to load exams or batches. Please check if you are logged in.');
         }
 
         const batchesData = await batchesRes.json();
         const examsData = await examsRes.json();
 
         if (Array.isArray(batchesData)) setBatches(batchesData);
+        
         if (Array.isArray(examsData)) {
           setExams(examsData);
-          if (!urlExamId && examsData.length > 0) setExamId(examsData[0].id);
+          // Set exam ID from URL or fallback to first exam
+          if (urlExamId && examsData.some(e => e.id === urlExamId)) {
+            setExamId(urlExamId);
+          } else if (examsData.length > 0) {
+            setExamId(examsData[0].id);
+          }
         }
       } catch (err: any) {
         console.error(err);
@@ -50,7 +58,7 @@ function CreateMockTestContent() {
       }
     };
     fetchData();
-  }, [urlExamId]);
+  }, []);
 
   const addSection = () => setSections([...sections, { name: '', duration: '', cutoffMarks: '' }]);
   const updateSection = (index: number, field: string, value: string) => {
@@ -178,13 +186,5 @@ function CreateMockTestContent() {
         </button>
       </form>
     </div>
-  );
-}
-
-export default function CreateMockTestPage() {
-  return (
-    <Suspense fallback={<div className="p-10 text-center font-bold text-xl text-blue-900">Loading page...</div>}>
-      <CreateMockTestContent />
-    </Suspense>
   );
 }
