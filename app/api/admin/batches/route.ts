@@ -15,7 +15,7 @@ export async function GET() {
       let totalScore = 0;
       let totalAttempts = 0;
       
-      batch.users.forEach(user => {
+      batch.users.forEach((user: any) => {
         user.attempts.forEach((attempt: any) => {
           totalScore += attempt.totalScore;
           totalAttempts++;

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-type Question = { id: string; text: string; optionA: string; optionB: string; optionC: string; optionD: string; correctOption: string; explanation: string; positiveMarks: number; negativeMarks: number; };
+type Question = { id: string; text: string; optionA: string; optionB: string; optionC: string; optionD: string; correctOption: string; explanation: string; topic?: string; positiveMarks: number; negativeMarks: number; };
 type Section = { id: string; name: string; questions: Question[] };
 type MockTest = { id: string; title: string; sections: Section[] };
 
