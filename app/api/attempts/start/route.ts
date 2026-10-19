@@ -21,8 +21,8 @@ export async function POST(req: NextRequest) {
     if (!forceNew) { attempt = await prisma.attempt.findFirst({ where: { userId: user!.id, mockTestId: mockTest.id, status: 'IN_PROGRESS' }, include: { responses: true } }); }
     
     const baseStart = attempt?.startTime ?? now;
-    const baseDeadline = new Date(baseStart.getTime() + (mockTest.totalDuration * 1000));
-    const sectionDeadlines = mockTest.timerType === 'SECTIONAL' ? mockTest.sections.reduce((st: any, s: any) => { st.cursor += s.duration * 1000; st.acc.push(new Date(baseStart.getTime() + st.cursor).toISOString()); return st; }, { acc: [], cursor: 0 }).acc : null;
+    const baseDeadline = new Date(baseStart.getTime() + (mockTest.totalDuration * 60 * 1000));
+    const sectionDeadlines = mockTest.timerType === 'SECTIONAL' ? mockTest.sections.reduce((st: any, s: any) => { st.cursor += s.duration * 60 * 1000; st.acc.push(new Date(baseStart.getTime() + st.cursor).toISOString()); return st; }, { acc: [], cursor: 0 }).acc : null;
     
     if (!attempt) { 
       try {
