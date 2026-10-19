@@ -25,6 +25,8 @@ model User {
   batch             Batch?             @relation(fields: [batchId], references: [id])
   attempts          Attempt[]
   notificationReads NotificationRead[]
+
+  bookmarks Bookmark[]
 }
 
 model Exam {
@@ -72,6 +74,8 @@ model Question {
   positiveMarks   Float     @default(1.0)
   negativeMarks   Float     @default(-0.25)
   responses       Response[]
+
+  bookmarks Bookmark[]
 }
 
 model Attempt {
@@ -125,4 +129,15 @@ model NotificationRead {
   readAt         DateTime     @default(now())
   
   @@unique([userId, notificationId])
+}
+model Bookmark {
+  id         String   @id @default(cuid())
+  userId     String
+  questionId String
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
 }

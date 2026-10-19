@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     const auth = await getUserFromRequest(req);
     if (!auth || auth.role !== 'STUDENT') return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     
-    const { testId } = await req.json();
+    const { testId, forceNew } = await req.json();
     if (!testId) return NextResponse.json({ error: 'testId required' }, { status: 400 });
     
     const user = await prisma.user.findUnique({ where: { id: auth.userId } });
@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
     if (!mockTest) return NextResponse.json({ error: 'Test not available' }, { status: 404 });
     
     const now = new Date();
-    let attempt = await prisma.attempt.findFirst({ where: { userId: user!.id, mockTestId: mockTest.id, status: 'IN_PROGRESS' }, include: { responses: true } });
+    let attempt = null;
+    if (!forceNew) { attempt = await prisma.attempt.findFirst({ where: { userId: user!.id, mockTestId: mockTest.id, status: 'IN_PROGRESS' }, include: { responses: true } }); }
     
     const baseStart = attempt?.startTime ?? now;
     const baseDeadline = new Date(baseStart.getTime() + (mockTest.totalDuration * 1000));
