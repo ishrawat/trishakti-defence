@@ -1,4 +1,3 @@
-export const instant = false;
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getUserIdFromToken } from '@/lib/auth';
@@ -9,58 +8,42 @@ export async function GET(req: NextRequest) {
     if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const user = await prisma.user.findUnique({ where: { id: userId } });
-    
-    // Get notifications for the student's batch OR global notifications
+    if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
+
     const notifications = await prisma.notification.findMany({
       where: {
         OR: [
-          { batchId: user?.batchId || undefined },
-          { batchId: null }
+          { batchId: null },
+          { batchId: user.batchId }
         ]
       },
-      include: {
-        reads: { where: { userId } }
-      },
-      orderBy: { createdAt: 'desc' },
-      take: 10
+      include: { reads: { where: { userId: user.id } } },
+      orderBy: { createdAt: 'desc' }
     });
 
-    const formatted = notifications.map((n: any) => ({
-      id: n.id,
-      title: n.title,
-      message: n.message,
-      createdAt: n.createdAt,
-      isRead: n.reads.length > 0
-    }));
-
-    return NextResponse.json(formatted);
+    return NextResponse.json(notifications.map(n => ({ ...n, isRead: n.reads.length > 0 })));
   } catch (error: any) {
-    console.error("❌ Student Notification Fetch Error:", error.message);
-    return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch notifications' }, { status: 500 });
   }
 }
 
-export async function PUT(request: Request) {
+export async function PUT(req: NextRequest) {
   try {
     const userId = await getUserIdFromToken(req);
     if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { notificationIds } = await request.json();
-    
-    // Create read receipts for each notification
-    const data = notificationIds.map((id: string) => ({
-      userId,
-      notificationId: id
-    }));
+    const { notificationIds } = await req.json();
+    if (!notificationIds || !Array.isArray(notificationIds)) {
+      return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
+    }
 
     await prisma.notificationRead.createMany({
-      data,
-      skipDuplicates: true // Ignore if already read
+      data: notificationIds.map(id => ({ userId, notificationId: id })),
+      skipDuplicates: true
     });
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error("❌ Student Notification PUT Error:", error.message);
-    return NextResponse.json({ error: 'Failed to mark read' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to mark notifications' }, { status: 500 });
   }
 }

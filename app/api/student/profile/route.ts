@@ -1,8 +1,6 @@
-export const instant = false;
-import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 import { getUserIdFromToken } from '@/lib/auth';
-
 
 export async function GET(req: NextRequest) {
   try {
@@ -19,10 +17,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       name: user.name,
       email: user.email,
-      batch: user.batch?.name || 'No Batch Assigned',
-      role: user.role
+      batch: user.batch?.name ?? null
     });
-  } catch (error) {
+  } catch (error: any) {
     return NextResponse.json({ error: 'Failed to fetch profile' }, { status: 500 });
   }
 }
