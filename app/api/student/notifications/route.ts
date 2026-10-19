@@ -13,7 +13,7 @@ export async function GET() {
     const notifications = await prisma.notification.findMany({
       where: {
         OR: [
-          { batchId: user?.batchId || 'none' },
+          { batchId: user?.batchId || undefined },
           { batchId: null }
         ]
       },
@@ -24,7 +24,6 @@ export async function GET() {
       take: 10
     });
 
-    // Map to include isRead boolean
     const formatted = notifications.map(n => ({
       id: n.id,
       title: n.title,
@@ -34,7 +33,8 @@ export async function GET() {
     }));
 
     return NextResponse.json(formatted);
-  } catch (error) {
+  } catch (error: any) {
+    console.error("❌ Student Notification Fetch Error:", error.message);
     return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
   }
 }
@@ -42,18 +42,24 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const userId = await getUserIdFromToken();
+    if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
     const { notificationIds } = await request.json();
     
-    // Mark as read
-    for (const id of notificationIds) {
-      await prisma.notificationRead.upsert({
-        where: { id: `${userId}_${id}` }, // Doesn't work like this, need custom unique constraint or just check first
-        update: {},
-        create: { userId, notificationId: id }
-      });
-    }
+    // Create read receipts for each notification
+    const data = notificationIds.map((id: string) => ({
+      userId,
+      notificationId: id
+    }));
+
+    await prisma.notificationRead.createMany({
+      data,
+      skipDuplicates: true // Ignore if already read
+    });
+
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
+    console.error("❌ Student Notification PUT Error:", error.message);
     return NextResponse.json({ error: 'Failed to mark read' }, { status: 500 });
   }
 }

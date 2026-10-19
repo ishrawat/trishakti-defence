@@ -17,12 +17,18 @@ export default function AdminNotifications() {
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await fetch('/api/admin/notifications', {
+    const res = await fetch('/api/admin/notifications', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, message, batchId })
     });
-    alert('Notification Sent!');
+    
+    if (res.ok) {
+      alert('Notification Sent!');
+    } else {
+      const err = await res.json();
+      alert(`Error: ${err.details || err.error}`);
+    }
     setTitle(''); setMessage('');
     setLoading(false);
   };
