@@ -1,18 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type Exam = { id: string; name: string };
 type Batch = { id: string; name: string };
 
 export default function CreateMockTest() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const urlExamId = searchParams.get('examId');
+
   const [exams, setExams] = useState<Exam[]>([]);
   const [batches, setBatches] = useState<Batch[]>([]);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const [examId, setExamId] = useState('');
+  const [examId, setExamId] = useState(urlExamId || '');
   const [title, setTitle] = useState('');
   const [timerType, setTimerType] = useState('FULL');
   const [totalDuration, setTotalDuration] = useState('60');
@@ -21,12 +25,36 @@ export default function CreateMockTest() {
   const [selectedBatchIds, setSelectedBatchIds] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch('/api/admin/batches').then(res => res.json()).then(data => setBatches(data));
-    fetch('/api/exams').then(res => res.json()).then(data => {
-      setExams(data);
-      if (data.length > 0) setExamId(data[0].id);
-    });
-  }, []);
+    const fetchData = async () => {
+      try {
+        const [batchesRes, examsRes] = await Promise.all([
+          fetch('/api/admin/batches', { cache: 'no-store' }),
+          fetch('/api/exams', { cache: 'no-store' })
+        ]);
+
+        if (!batchesRes.ok || !examsRes.ok) {
+          throw new Error('Failed to load exams or batches. Please try logging in again.');
+        }
+
+        const batchesData = await batchesRes.json();
+        const examsData = await examsRes.json();
+
+        // Safely set state only if they are arrays
+        if (Array.isArray(batchesData)) setBatches(batchesData);
+        if (Array.isArray(examsData)) {
+          setExams(examsData);
+          // If no examId in URL, select the first one
+          if (!urlExamId && examsData.length > 0) {
+            setExamId(examsData[0].id);
+          }
+        }
+      } catch (err: any) {
+        console.error(err);
+        setErrorMsg(err.message);
+      }
+    };
+    fetchData();
+  }, [urlExamId]);
 
   const addSection = () => setSections([...sections, { name: '', duration: '', cutoffMarks: '' }]);
   const updateSection = (index: number, field: string, value: string) => {
@@ -37,46 +65,62 @@ export default function CreateMockTest() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!examId) return alert('Please select an exam');
     setLoading(true);
+    setErrorMsg('');
 
     const payload = {
       examId, title, timerType,
       totalDuration: parseInt(totalDuration),
       overallCutoff,
       sections,
-      batchIds: selectedBatchIds // Send batch IDs to API
+      batchIds: selectedBatchIds
     };
 
-    const res = await fetch('/api/mocktests', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const res = await fetch('/api/mocktests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    if (res.ok) {
-      alert('Mock Test Created Successfully!');
-      router.push('/teacher');
-    } else {
-      alert('Error creating test');
+      if (res.ok) {
+        alert('Mock Test Created Successfully!');
+        router.push('/teacher');
+      } else {
+        const errorData = await res.json();
+        throw new Error(errorData.error || 'Error creating test');
+      }
+    } catch (err: any) {
+      setErrorMsg(err.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
     <div className="p-8 max-w-3xl mx-auto text-gray-900 bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-blue-900">Create Mock Test</h1>
+      
+      {errorMsg && (
+        <div className="bg-red-50 text-red-600 p-4 rounded mb-6 border border-red-200">
+          <strong>Error:</strong> {errorMsg}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md border border-gray-200 space-y-6">
         
         <div className="space-y-4">
           <div>
             <label className="block font-medium mb-1">Select Exam</label>
-            <select value={examId} onChange={(e) => setExamId(e.target.value)} className="w-full border p-2 rounded">
+            <select required value={examId} onChange={(e) => setExamId(e.target.value)} className="w-full border p-2 rounded">
+              <option value="" disabled>Select an exam...</option>
               {exams.map(ex => <option key={ex.id} value={ex.id}>{ex.name}</option>)}
             </select>
           </div>
           <div>
             <label className="block font-medium mb-1">Mock Test Title</label>
-            <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} className="w-full border p-2 rounded" />
+            <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} className="w-full border p-2 rounded" placeholder="e.g. SSC CGL Tier 1 Mock 1" />
           </div>
         </div>
 
@@ -113,7 +157,6 @@ export default function CreateMockTest() {
           <button type="button" onClick={addSection} className="text-sm bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">+ Add Section</button>
         </div>
 
-        {/* BATCH SELECTION */}
         <div className="border-t pt-4">
           <h2 className="text-lg font-bold mb-2 text-blue-900">Assign to Batches</h2>
           <div className="flex flex-wrap gap-4">
@@ -134,7 +177,7 @@ export default function CreateMockTest() {
           </div>
         </div>
 
-        <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-700">
+        <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-700 disabled:bg-gray-400">
           {loading ? 'Saving...' : 'Save Mock Test'}
         </button>
       </form>
