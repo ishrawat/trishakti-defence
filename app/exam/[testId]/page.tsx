@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
-import RichText from '@/components/RichText';
+import RichTextViewer from '@/components/RichTextViewer';
 
 type Question = { id: string; text: string; optionA: string; optionB: string; optionC: string; optionD: string; correctOption: string; positiveMarks: number; negativeMarks: number; };
 type Section = { id: string; name: string; duration: number; questions: Question[] };
@@ -355,14 +355,14 @@ function ExamContent() {
           </div>
           
           <div className="p-6 flex-1 overflow-y-auto">
-            <div className="text-lg mb-6 leading-relaxed"><RichText content={String(currentQ.text || "")} /></div>
+            <div className="text-lg mb-6 leading-relaxed"><RichTextViewer content={currentQ.text} /></div>
             <div className="space-y-3">
               {['A', 'B', 'C', 'D'].map((opt) => {
                 const optionText = currentQ[`option${opt}` as keyof Question];
                 return (
                   <label key={opt} className="flex items-center gap-3 p-2 hover:bg-gray-50 cursor-pointer border border-transparent hover:border-gray-300 rounded">
                     <input type="radio" name={`q_${currentQ.id}`} value={opt} checked={answers[currentQ.id] === opt} onChange={() => handleOptionSelect(opt)} className="w-4 h-4 cursor-pointer" />
-                    <span className="text-base flex items-center"><strong className="mr-2">{opt})</strong> <RichText content={String(optionText || "")} /></span>
+                    <span className="text-base flex items-center"><strong className="mr-2">{opt})</strong> <RichTextViewer content={optionText} /></span>
                   </label>
                 )
               })}
