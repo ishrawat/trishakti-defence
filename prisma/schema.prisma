@@ -27,6 +27,8 @@ model User {
   notificationReads NotificationRead[]
 
   bookmarks Bookmark[]
+
+  expoPushToken String?
 }
 
 model Exam {
