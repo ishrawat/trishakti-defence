@@ -13,7 +13,14 @@ export async function GET(req: NextRequest) {
 
     const tests = await prisma.mockTest.findMany({
       where: { batches: { some: { id: user.batchId } } },
-      include: { exam: true }
+      include: { 
+        exam: true,
+        // NEW: Fetch any active attempts for this user
+        attempts: {
+          where: { userId: user.id, status: 'IN_PROGRESS' },
+          select: { id: true, startTime: true }
+        }
+      }
     });
 
     return NextResponse.json(tests);
