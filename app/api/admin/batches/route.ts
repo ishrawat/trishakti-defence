@@ -1,6 +1,5 @@
-import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
-
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
@@ -28,7 +27,6 @@ export async function GET() {
         studentCount: batch.users.length,
         averageScore: totalAttempts > 0 ? (totalScore / totalAttempts).toFixed(2) : 'N/A',
         totalAttempts,
-        // Explicitly map to string array to prevent undefined errors
         testIds: batch.mockTests.map((t: any) => t.id) || [] 
       };
     });
