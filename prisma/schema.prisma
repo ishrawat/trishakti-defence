@@ -149,4 +149,8 @@ model Banner {
   linkUrl   String
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
+
+  title      String?
+  subtitle   String?
+  buttonText String?
 }

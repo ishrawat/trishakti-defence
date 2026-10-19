@@ -8,14 +8,16 @@ export async function POST(req: NextRequest) {
   if (!auth || auth.role !== 'TEACHER') return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   try {
-    const { imageUrl, linkUrl } = await req.json();
+    const { imageUrl, linkUrl, title, subtitle, buttonText } = await req.json();
 
     if (!imageUrl || !linkUrl) {
       return NextResponse.json({ error: 'Image URL and Link URL are required' }, { status: 400 });
     }
 
     await prisma.banner.updateMany({ data: { isActive: false } });
-    const newBanner = await prisma.banner.create({ data: { imageUrl, linkUrl, isActive: true } });
+    const newBanner = await prisma.banner.create({ 
+      data: { imageUrl, linkUrl, title, subtitle, buttonText, isActive: true } 
+    });
 
     return NextResponse.json(newBanner);
   } catch (error: any) {
