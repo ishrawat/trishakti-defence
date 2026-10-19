@@ -2,6 +2,8 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { jwtVerify } from 'jose';
 
+// This tells Next.js 16 to skip static prerendering for this route
+export const instant = false; 
 
 export default async function Home() {
   const cookieStore = await cookies();
