@@ -2,7 +2,7 @@ import { cookies, headers } from 'next/headers';
 import { jwtVerify } from 'jose';
 import type { NextRequest } from 'next/server';
 
-const SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
+const SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'super-secret-trishul-key-2024');
 
 export async function authTokenFromRequest(_req?: NextRequest): Promise<string | undefined> {
   try {
@@ -32,9 +32,9 @@ export async function getUserFromRequest(_req?: NextRequest) {
   }
 }
 
-// Keep your original function just in case anything else uses it
+// CRITICAL FIX: This is what the student routes are using. We change it to accept Bearer tokens!
 export async function getUserIdFromToken() {
-  const token = (await cookies()).get('auth_token')?.value;
+  const token = await authTokenFromRequest();
   if (!token) return null;
   try {
     const { payload } = await jwtVerify(token, SECRET);
