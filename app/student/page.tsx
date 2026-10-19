@@ -55,6 +55,24 @@ export default function StudentDashboard() {
 
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
+  const handleOpenNotifications = async () => {
+    const newState = !showNotifications;
+    setShowNotifications(newState);
+
+    if (newState && unreadCount > 0) {
+      // 1. Instantly clear the red badge in the UI
+      setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
+
+      // 2. Send the API request to permanently mark them as read in Supabase
+      const unreadIds = notifications.filter(n => !n.isRead).map(n => n.id);
+      await fetch('/api/student/notifications', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ notificationIds: unreadIds })
+      });
+    }
+  };
+
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">Loading...</div>;
 
   return (
@@ -77,7 +95,7 @@ export default function StudentDashboard() {
             {/* NOTIFICATION BELL */}
             <div className="relative">
               <button 
-                onClick={() => setShowNotifications(!showNotifications)}
+                onClick={handleOpenNotifications}
                 className="p-2 text-gray-500 hover:text-[#5e1515] transition-colors relative"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
