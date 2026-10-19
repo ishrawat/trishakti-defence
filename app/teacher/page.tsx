@@ -51,6 +51,11 @@ export default function AdminDashboard() {
       {/* HEADER WITH NEW BUTTONS */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <h1 className="text-3xl font-bold text-blue-900">Admin / Teacher Dashboard</h1>
+        <div className="mt-4 mb-6">
+          <a href="/teacher/banner" className="inline-flex items-center gap-2 bg-[#5e1515] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#4a1010] transition-colors shadow-sm">
+            🖼️ Manage Promo Banner
+          </a>
+        </div>
         
         <div className="flex flex-wrap gap-3">
           <Link href="/teacher/notifications" className="bg-yellow-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-yellow-700 shadow-sm transition-colors flex items-center gap-2">
