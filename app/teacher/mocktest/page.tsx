@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 type Exam = { id: string; name: string };
 type Batch = { id: string; name: string };
 
-export default function CreateMockTest() {
+function CreateMockTestContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const urlExamId = searchParams.get('examId');
@@ -33,20 +33,16 @@ export default function CreateMockTest() {
         ]);
 
         if (!batchesRes.ok || !examsRes.ok) {
-          throw new Error('Failed to load exams or batches. Please try logging in again.');
+          throw new Error('Failed to load exams or batches.');
         }
 
         const batchesData = await batchesRes.json();
         const examsData = await examsRes.json();
 
-        // Safely set state only if they are arrays
         if (Array.isArray(batchesData)) setBatches(batchesData);
         if (Array.isArray(examsData)) {
           setExams(examsData);
-          // If no examId in URL, select the first one
-          if (!urlExamId && examsData.length > 0) {
-            setExamId(examsData[0].id);
-          }
+          if (!urlExamId && examsData.length > 0) setExamId(examsData[0].id);
         }
       } catch (err: any) {
         console.error(err);
@@ -182,5 +178,13 @@ export default function CreateMockTest() {
         </button>
       </form>
     </div>
+  );
+}
+
+export default function CreateMockTestPage() {
+  return (
+    <Suspense fallback={<div className="p-10 text-center font-bold text-xl text-blue-900">Loading page...</div>}>
+      <CreateMockTestContent />
+    </Suspense>
   );
 }
