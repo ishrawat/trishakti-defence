@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Batch {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  users     User[]
+  mockTests MockTest[]
+}
+
+model User {
+  id              String   @id @default(uuid())
+  email           String   @unique
+  password        String
+  name            String
+  role            String
+  initialPassword String?
+  batchId         String?
+  batch           Batch?   @relation(fields: [batchId], references: [id])
+  attempts        Attempt[]
+}
+
+model Exam {
+  id          String     @id @default(uuid())
+  name        String
+  description String?
+  mockTests   MockTest[]
+}
+
+model MockTest {
+  id             String    @id @default(uuid())
+  examId         String
+  exam           Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
+  title          String
+  timerType      String
+  totalDuration  Int
+  overallCutoff  Float?
+  sections       Section[]
+  attempts       Attempt[]
+  batches        Batch[]
+}
+
+model Section {
+  id            String     @id @default(uuid())
+  mockTestId    String
+  mockTest      MockTest   @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
+  name          String
+  duration      Int?
+  cutoffMarks   Float?
+  questions     Question[]
+}
+
+model Question {
+  id              String    @id @default(uuid())
+  sectionId       String
+  section         Section   @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  text            String
+  optionA         String
+  optionB         String
+  optionC         String
+  optionD         String
+  correctOption   String
+  explanation     String?
+  topic           String?
+  positiveMarks   Float     @default(1.0)
+  negativeMarks   Float     @default(-0.25)
+  responses       Response[]
+}
+
+model Attempt {
+  id             String     @id @default(uuid())
+  userId         String
+  user           User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mockTestId     String
+  mockTest       MockTest   @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
+  startTime      DateTime   @default(now())
+  endTime        DateTime?
+  status         String     @default("IN_PROGRESS")
+  totalScore     Float      @default(0)
+  tabSwitchCount Int        @default(0)
+  pauseCount     Int        @default(0)
+  responses      Response[]
+}
+
+model Response {
+  id             String   @id @default(uuid())
+  attemptId      String
+  attempt        Attempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionId     String
+  question       Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  selectedOption String?
+  status         String
+  timeSpent      Int      @default(0)
+}

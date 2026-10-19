@@ -1,0 +1,150 @@
+# Mock Test Platform - AI Context Guide
+
+## 🎯 Project Overview
+This is a full-stack, enterprise-grade mock test platform for coaching institutes. It features strict SSC-style exam interfaces, autosaving, anti-cheat proctoring, sectional timers, batch-level access control, student micro-analytics, and deep teacher dashboards.
+
+## 🛠️ Tech Stack
+- **Framework:** Next.js 16 (App Router, Turbopack)
+- **Language:** TypeScript / React
+- **Styling:** Tailwind CSS
+- **Database ORM:** Prisma 7 (Using `@prisma/adapter-better-sqlite3`)
+- **Database:** SQLite (for testing, will migrate to PostgreSQL for production)
+- **Auth:** Custom JWT stored in HTTP-Only cookies (using `jose` for Edge middleware compatibility).
+- **Hashing:** `bcryptjs`
+
+---
+
+## 📂 Directory Structure
+```text
+/app
+  /api                  # Backend API Routes
+    /admin              # Teacher-only APIs (batches, students, results)
+    /attempts           # Exam start, submit, save, violation, pause
+    /auth               # Login authentication
+    /exams              # Exam CRUD
+    /mocktests          # Mock Test CRUD
+    /questions          # Question CRUD + Excel bulk upload
+    /student            # Student-specific APIs (tests, history)
+  /exam/[testId]        # The strict SSC-style exam interface
+  /login                # Login page
+  /student              # Student dashboard
+    /result/[attemptId] # Post-test scorecard
+    /review/[attemptId] # Question-by-question review
+  /teacher              # Admin dashboard
+    /batches            # Manage batches & assign tests to batches
+    /students           # Manage students & view profiles
+      /[userId]         # Micro-analytics for a specific student
+    /mocktest           # Create/Edit Mock Tests & timers
+    /questions          # Question Builder + Excel Upload
+    /results            # All attempts + Excel export
+      /[attemptId]      # Forensic view of an attempt
+/lib
+  auth.ts               # JWT extraction helper using 'jose'
+/middleware.ts          # Route protection & Role-Based Access Control (RBAC)
+/prisma
+  schema.prisma         # Database schema
+  dev.db                # SQLite database
+🗄️ Database Schema (Prisma)
+Important: The app uses Prisma 7. url is defined in prisma.config.ts, NOT schema.prisma.
+
+Batch: id, name. (Relations: Has many Users, Many-to-Many with MockTest).
+
+User: id, email, password (hashed), name, role (STUDENT/TEACHER), initialPassword (plaintext for admin viewing), batchId. (Relations: Belongs to Batch, Has many Attempts).
+
+Exam: id, name, description. (Relations: Has many MockTests).
+
+MockTest: id, examId, title, timerType (FULL/SECTIONAL), totalDuration, overallCutoff. (Relations: Belongs to Exam, Has many Sections, Many-to-Many with Batch).
+
+Section: id, mockTestId, name, duration, cutoffMarks. (Relations: Belongs to MockTest, Has many Questions).
+
+Question: id, sectionId, text, optionA-D, correctOption, explanation, topic, positiveMarks, negativeMarks. (Relations: Belongs to Section, Has many Responses).
+
+Attempt: id, userId, mockTestId, startTime, endTime, status (IN_PROGRESS/COMPLETED/ABANDONED), totalScore, tabSwitchCount, pauseCount. (Relations: Belongs to User & MockTest, Has many Responses).
+
+Response: id, attemptId, questionId, selectedOption, status, timeSpent (seconds). (Relations: Belongs to Attempt & Question).
+
+🔌 API Routes Reference
+Auth & Middleware
+middleware.ts: Protects /teacher/* (Admin only) and /student/* + /exam/* (Student only). Redirects to /login if no valid JWT.
+
+POST /api/auth/login: Verifies bcrypt hash, signs JWT via jose, sets HTTP-Only cookie.
+
+lib/auth.ts: Helper getUserIdFromToken() used in API routes to securely identify the current student.
+
+Admin / Teacher
+Batches: GET/POST /api/admin/batches (list/create). PUT /api/admin/batches/[batchId] (assign tests to a batch).
+
+Students: GET/POST /api/admin/students (list/create). GET/PUT /api/admin/students/[userId] (view profile/update details & reset password).
+
+Mock Tests: POST /api/mocktests (create with sections/batches). PUT /api/mocktests/[testId] (update timers, sections, and batch access).
+
+Questions: GET/POST /api/questions (list/create). POST /api/questions/bulk (Excel upload). PUT/DELETE /api/questions/[questionId] (edit/delete).
+
+Results: GET /api/admin/results (list all attempts). GET /api/admin/results/[attemptId] (forensics for one attempt).
+
+Student & Exam
+Dashboard: GET /api/student/tests (fetches ONLY tests assigned to the student's batch). GET /api/student/history (past attempts).
+
+Exam Engine:
+
+POST /api/attempts/start: Starts/resumes attempt. forceNew: true abandons old ones.
+
+POST /api/attempts/save: Autosave an answer & increment timeSpent.
+
+POST /api/attempts/violation: Increment tabSwitchCount.
+
+POST /api/attempts/pause: Increment pauseCount.
+
+POST /api/attempts: Submits test, calculates scores, returns analytics.
+
+Review: GET /api/attempts/[attemptId]/review: Fetches full attempt for the review page.
+
+🧠 Core Workflows & Business Logic
+1. Batch Access Control (Strict Mode)
+Admin UI: When creating/editing a test, the admin checks boxes for specific batches (Many-to-Many).
+
+Student API: GET /api/student/tests uses a strict query: where: { batches: { some: { id: user.batchId } } }. If a test is not explicitly assigned to the student's batch, they cannot see it. (No public tests unless explicitly built otherwise).
+
+Batch UI: Admin can also go to /teacher/batches, click "Edit Test Access", and check/uncheck which tests that batch has access to.
+
+2. Exam Interface (/exam/[testId])
+SSC UI: Left panel for question, right panel for color-coded palette (Green=Answered, Red=Visited/Unanswered, Purple=Marked).
+
+Autosave: Every click triggers /api/attempts/save.
+
+Time Tracking: A useRef tracks time per question. Fires on question change.
+
+Anti-Cheat: Listens for visibilitychange (tab switch) and window.blur (Alt+Tab). Logs a violation and shows a red banner. Also enforces Full-Screen mode.
+
+Sectional Timer: If timerType === 'SECTIONAL', users cannot go back to previous sections. The bottom-left button says Submit Section. When time hits 0, it auto-advances to the next section.
+
+Pause Feature: Overlays a lock screen, freezes the timer, and increments pauseCount.
+
+3. Scoring & Analytics (POST /api/attempts)
+Server-side scoring: Total = (Correct * Positive) - (Wrong * Negative).
+
+Calculates Sectional Cutoffs and Overall Cutoff.
+
+Generates Micro Analytics: Calculates accuracy per Topic/Chapter (if topic is set on questions) and returns it as topicResults for the Result Page.
+
+4. Teacher Dashboards
+Student Profile: /teacher/students/[userId] shows average score, total time, integrity flags (tab switches), a CSS bar chart of score progression, and a list of past attempts.
+
+Forensics: /teacher/results/[attemptId] shows exactly what the student picked vs. the correct answer, and time spent per question.
+
+Excel Export: Results page has an "Export to Excel" button utilizing the xlsx library.
+
+Bulk Upload: Question Builder allows downloading a template and uploading an Excel file to instantly insert 100+ questions.
+
+🚨 Important Rules for AI Assistants (CRITICAL)
+Prisma 7 URL: NEVER put url = env("DATABASE_URL") in schema.prisma. It will crash. It belongs in prisma.config.ts and the PrismaClient({ adapter }) constructor.
+
+Next.js 16 Dynamic: NEVER use export const dynamic = 'force-dynamic'; in API routes. Next.js 16 throws a build error. Routes are dynamic by default.
+
+Next.js Caching: In frontend client components, always use fetch('/api/...', { cache: 'no-store' }) for highly dynamic data (like Admin Results or Tests).
+
+State Reset: When linking to the exam from the dashboard, use a standard <a href="..."> tag instead of <Link>. This forces a hard page reload and clears old React state.
+
+PowerShell Quirks: When providing PowerShell commands to create files, ALWAYS use Join-Path $basePath "path" and [System.IO.File]::WriteAllText(). Using relative paths or Set-Content often fails silently or saves to the wrong directory on the user's machine.
+
+Prisma Sync: If the user gets a 500 API error after a schema change, ALWAYS instruct them to run npx prisma generate, stop the server, delete .next, and restart.
