@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import RichTextEditor from '@/components/RichTextEditor';
 
 type Question = { id: string; text: string; optionA: string; optionB: string; optionC: string; optionD: string; correctOption: string; explanation: string; topic?: string; positiveMarks: number; negativeMarks: number; };
 type Section = { id: string; name: string; questions: Question[] };
@@ -254,19 +255,19 @@ export default function QuestionBuilder() {
 
             <div>
               <label className="block font-medium mb-1 text-sm">Question Text</label>
-              <textarea required rows={3} value={text} onChange={(e) => setText(e.target.value)} className="w-full border p-2 rounded text-sm"></textarea>
+              <RichTextEditor value={text} onChange={setText} />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <div><label className="block text-xs mb-1">Option A</label><input type="text" required value={optionA} onChange={(e) => setOptionA(e.target.value)} className="w-full border p-2 rounded text-sm" /></div>
-              <div><label className="block text-xs mb-1">Option B</label><input type="text" required value={optionB} onChange={(e) => setOptionB(e.target.value)} className="w-full border p-2 rounded text-sm" /></div>
-              <div><label className="block text-xs mb-1">Option C</label><input type="text" required value={optionC} onChange={(e) => setOptionC(e.target.value)} className="w-full border p-2 rounded text-sm" /></div>
-              <div><label className="block text-xs mb-1">Option D</label><input type="text" required value={optionD} onChange={(e) => setOptionD(e.target.value)} className="w-full border p-2 rounded text-sm" /></div>
+              <div><label className="block text-xs mb-1">Option A</label><RichTextEditor value={optionA} onChange={setOptionA} placeholder="Option A" /></div>
+              <div><label className="block text-xs mb-1">Option B</label><RichTextEditor value={optionB} onChange={setOptionB} placeholder="Option B" /></div>
+              <div><label className="block text-xs mb-1">Option C</label><RichTextEditor value={optionC} onChange={setOptionC} placeholder="Option C" /></div>
+              <div><label className="block text-xs mb-1">Option D</label><RichTextEditor value={optionD} onChange={setOptionD} placeholder="Option D" /></div>
             </div>
 
             <div>
               <label className="block font-medium mb-1 text-sm">Explanation (Optional)</label>
-              <textarea rows={2} value={explanation} onChange={(e) => setExplanation(e.target.value)} className="w-full border p-2 rounded text-sm"></textarea>
+              <RichTextEditor value={explanation} onChange={setExplanation} placeholder="Explanation (Optional)" />
             </div>
 
             {/* MARKS SECTION */}
